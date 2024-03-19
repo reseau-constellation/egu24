@@ -1,3 +1,7 @@
 {
-    "en": {}
+  "en": {
+    "accueil": {
+      "titre": "SC6.8: Using distributed databases in your citizen science research"
+    }
+  }
 }

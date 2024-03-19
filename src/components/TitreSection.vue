@@ -10,12 +10,12 @@
   </v-col>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from "vue";
 
 const props = defineProps<{ titre: string; sousTitre?: string | string[] }>();
 const listeSousTitres = computed(() => {
   if (!props.sousTitre) return [];
-  if (typeof props.sousTitre === 'string') return [props.sousTitre];
+  if (typeof props.sousTitre === "string") return [props.sousTitre];
   return props.sousTitre;
 });
 </script>

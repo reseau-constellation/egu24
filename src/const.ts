@@ -16,11 +16,11 @@ export const ID_COL_LONG = "longitude";
 export const ID_COL_PRECIP = "précipitation";
 
 export type élémentDonnéesPluvio = {
-    [ID_COL_ID]: string;
-    [ID_COL_HORO]: number;
-    [ID_COL_LAT]: number;
-    [ID_COL_LONG]: number;
-    [ID_COL_PRECIP]: number;
+  [ID_COL_ID]: string;
+  [ID_COL_HORO]: number;
+  [ID_COL_LAT]: number;
+  [ID_COL_LONG]: number;
+  [ID_COL_PRECIP]: number;
 };
 
 export const SCHÉMA_DONNÉES = {
@@ -47,9 +47,9 @@ export const SCHÉMA_DONNÉES = {
         {
           idVariable: ID_VAR_PRECIP,
           idColonne: ID_COL_PRECIP,
-        }
+        },
       ],
-      clef: CLEF_TABLEAU
-    }
-  ]
-}
+      clef: CLEF_TABLEAU,
+    },
+  ],
+};

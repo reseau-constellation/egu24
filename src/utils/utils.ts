@@ -1,3 +1,3 @@
 export const ouvrirLien = (lien: string) => {
-  window.open(lien, '_blank');
+  window.open(lien, "_blank");
 };

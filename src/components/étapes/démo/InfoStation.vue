@@ -1,20 +1,25 @@
 <template>
   <v-line-chart></v-line-chart>
   <v-dialog>
-    <template #activator="{props: propsActivateur}">
-        <v-btn v-bind="propsActivateur" :disabled="!prochainePhoto" append-icon="mdi-plus">Contribute data</v-btn>
+    <template #activator="{ props: propsActivateur }">
+      <v-btn
+        v-bind="propsActivateur"
+        :disabled="!prochainePhoto"
+        append-icon="mdi-plus"
+        >Contribute data</v-btn
+      >
     </template>
     <v-card>
-        {{ prochainePhoto }}
+      {{ prochainePhoto }}
     </v-card>
   </v-dialog>
 </template>
 <script setup lang="ts">
-import { utiliserDonnées } from '@/composables/données';
+import { utiliserDonnées } from "@/composables/données";
 
-const props = defineProps<{idStation: string}>();
+const props = defineProps<{ idStation: string }>();
 
-const {aléatoire} = utiliserDonnées()
+const { aléatoire } = utiliserDonnées();
 
-const prochainePhoto = aléatoire({idStation: props.idStation});
+const prochainePhoto = aléatoire({ idStation: props.idStation });
 </script>

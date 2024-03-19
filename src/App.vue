@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { மொழிகளைப்_பயன்படுத்து } from '@lassi-js/kilimukku-vue';
+import { மொழிகளைப்_பயன்படுத்து } from "@lassi-js/kilimukku-vue";
 
 // Direction texte
 const { வலதிலிருந்து_இடது_மொழி } = மொழிகளைப்_பயன்படுத்து();
