@@ -5,8 +5,8 @@
     @retour="() => émettre('retour')"
     @avancer="() => émettre('avancer')"
   >
-    <v-col>
-      <span class="text-h3">Access Python/R/Julia code repos</span>
+    <v-col :class="[mdAndUp ? 'text-h2' : 'text-h3', 'text-center']" :cols="12">
+      {{ t("Access Python/R/Julia code repos") }}
     </v-col>
   </etape-cours>
 </template>
