@@ -12,6 +12,12 @@
         "docu": "Read docs",
         "codeSource": "Source code"
       }
+    },
+    "données": {
+      "titre": "Download sample data",
+      "télécharger": "Download data",
+      "lienDynamique": "Copy link",
+      "crédits": "Data source:"
     }
   },
   "த": {

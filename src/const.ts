@@ -1,4 +1,6 @@
-export const URL_CODE_SOURCE = "https://github.com/reseau-constellation"
+export const URL_CODE_SOURCE = "https://github.com/reseau-constellation";
+export const URL_DONNÉES_EXEMPLE = "https://drive.google.com/drive/folders/1L-nZ2rhkJUtyL0L-mpSxzOT9Y5BdCruj?usp=sharing";
+export const URL_DONNÉES_LIEN = "https://docs.google.com/spreadsheets/d/15_Kmiu2MRqCf23ZspeD-Ex9x3cUYlisJM9cc9ynayow/";
 
 export const ID_NUÉE_DONNÉES = process.env.VITE_ID_NUÉE_DONNÉES || "";
 export const CLEF_TABLEAU = "pluviométrie";

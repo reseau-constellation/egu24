@@ -11,6 +11,8 @@ declare module 'vue' {
     'AjoutDonnée': typeof import('./src/components/étapes/démo/AjoutDonnée.vue')['default']
     BtnMenuLangues: typeof import('./src/components/BtnMenuLangues.vue')['default']
     'CarteFonctionalité': typeof import('./src/components/CarteFonctionalité.vue')['default']
+    CarteLien: typeof import('./src/components/étapes/communs/CarteLien.vue')['default']
+    CarteOption: typeof import('./src/components/étapes/communs/CarteOption.vue')['default']
     'CarteTéléchargement': typeof import('./src/components/CarteTéléchargement.vue')['default']
     CarteUtilisation: typeof import('./src/components/CarteUtilisation.vue')['default']
     copy: (typeof import("./src/components/MenuLangues copy.vue"))["default"]
