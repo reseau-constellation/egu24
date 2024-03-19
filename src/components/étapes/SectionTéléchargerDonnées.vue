@@ -22,7 +22,10 @@
       </div>
     </v-col>
     <v-col :cols="12" class="text-center">
-      <span class="text-disabled"> {{ t('données.crédits') }} https://climate.meteo.gc.ca</span>
+      <span class="text-disabled" @click="()=>ouvrirLien('https://climate.meteo.gc.ca')"> 
+        {{ t('données.crédits') }} {{ lienSourceDonnées }}
+        <v-icon icon="mdi-open-in-new" size="small" />
+      </span>
     </v-col>
   </etape-cours>
 </template>
@@ -48,4 +51,6 @@ const { mdAndUp } = useDisplay();
 
 const { மொழியாக்கம்_பயன்படுத்து } = கிளிமூக்கை_பயன்படுத்து();
 const { $மொ: t } = மொழியாக்கம்_பயன்படுத்து({});
+
+const lienSourceDonnées = "https://climate.meteo.gc.ca"
 </script>
