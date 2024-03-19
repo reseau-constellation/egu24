@@ -13,7 +13,7 @@
       :class="{ 'my-auto': true, 'text-center': !mdAndUp }"
     >
       <v-img
-        class="mb-4"
+        :class="{ 'mb-4': true, 'mx-4': !mdAndUp }"
         src="@/assets/Logo EGU.svg"
         height="150"
         :width="mdAndUp ? 600 : undefined"
@@ -24,13 +24,15 @@
           'text-h5': !mdAndUp,
           'font-weight-light': true,
           'mb-n1': true,
+          'mx-4': !mdAndUp,
         }"
       >
-        {{ t('accueil.titre' ) }}
+        {{ t("accueil.titre") }}
       </div>
-      <v-btn prepend-icon="mdi-earth" class="my-6">{{
-        t("Change language")
-      }}</v-btn>
+      <v-btn prepend-icon="mdi-earth" class="my-6">
+        {{ t("accueil.changerLangue") }}
+        <menu-langues />
+      </v-btn>
     </v-col>
   </etape-cours>
 </template>
@@ -39,6 +41,7 @@ import { கிளிமூக்கை_பயன்படுத்து } from
 import { useDisplay } from "vuetify";
 
 import EtapeCours from "@/components/ÉtapeCours.vue";
+import MenuLangues from "@/components/MenuLangues.vue";
 
 defineProps<{
   nEtapes: number;

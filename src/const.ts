@@ -1,4 +1,4 @@
-import type { schémaSpécificationBd } from "@constl/ipa/dist/bds";
+export const URL_CODE_SOURCE = "https://github.com/reseau-constellation"
 
 export const ID_NUÉE_DONNÉES = process.env.VITE_ID_NUÉE_DONNÉES || "";
 export const CLEF_TABLEAU = "pluviométrie";

@@ -39,7 +39,7 @@ import { onMounted, ref } from "vue";
 import SectionAccueil from "./étapes/SectionAccueil.vue";
 
 import { obtLienTéléchargement } from "@/utils/téléchargements";
-import SectionObtConstellation from "./étapes/SectionObtConstellation.vue";
+import SectionObtConstellation from "./étapes/obtConstellation/SectionObtConstellation.vue";
 import SectionTelechargerDonnees from "./étapes/SectionTéléchargerDonnées.vue";
 import SectionDémo from "./étapes/démo/SectionDémo.vue";
 import SectionCode from "./étapes/SectionCode.vue";

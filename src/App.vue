@@ -2,7 +2,7 @@
   <v-app>
     <v-locale-provider :rtl="dàg">
       <v-main>
-        <MenuLangues />
+        <BtnMenuLangues />
         <router-view v-slot="{ Component }">
           <transition name="fade">
             <component :is="Component" />
