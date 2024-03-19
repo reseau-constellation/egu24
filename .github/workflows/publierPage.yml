@@ -1,8 +1,12 @@
 name: Appli internet
-on: [ workflow_call ]
+
+on:
+  push:
+    branches:
+      - main
 
 concurrency:
-  group: typechecking-${{ github.ref }}
+  group: déployer-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
