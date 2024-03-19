@@ -18,6 +18,12 @@
       "télécharger": "Download data",
       "lienDynamique": "Copy link",
       "crédits": "Data source:"
+    },
+    "démo": {
+      "titre": "Live demo!",
+      "sousTitre": "You are now a citizen scientist",
+      "source": "Data from SmartPhones4Water.",
+      "merci": "Thank you!"
     }
   },
   "த": {

@@ -5,14 +5,22 @@
     @retour="() => émettre('retour')"
     @avancer="() => émettre('avancer')"
   >
-    <v-col :cols="mdAndUp ? 4 : 12" class="pa-6">
-      <span class="text-h3">Live demo !</span>
-      <div>{{ t("You are now a citizen scientist") }}</div>
-      <div>https://data.smartphones4water.org/</div>
-      <v-btn append-icon="mdi-camera">Choose random photo</v-btn>
-      <v-switch :label="t('Show rainfall')" />
+    <v-col :cols="mdAndUp ? 4 : 12">
+      <v-card class="pa-6" variant="flat">
+        <div class="text-h3">{{ t('démo.titre') }}</div>
+        <v-divider class="my-4" />
+        <div class="text-h5">{{ t("démo.sousTitre") }}</div>
+        <v-btn append-icon="mdi-camera">Choose random photo</v-btn>
+        <v-switch :label="t('Show rainfall')" />
+        <div class="text-disabled" @click="()=>ouvrirLien('https://data.smartphones4water.org/')">
+          {{ t('démo.source') }}
+          <v-icon size="small" icon="mdi-open-in-new" />
+          {{ t('démo.merci') }}
+          <v-icon icon="mdi-emoticon-happy-outline" size="small" />
+        </div>
+      </v-card>
     </v-col>
-    <v-col :cols="mdAndUp ? 8 : 12" class="pa-6">
+    <v-col :cols="mdAndUp ? 8 : 12">
       <div
         class="mx-auto"
         :style="{
@@ -52,6 +60,7 @@ import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
 import MarqueurStation from "./MarqueurStation.vue";
 import { stations } from "@/données/népal";
+import { ouvrirLien } from "@/utils/utils";
 
 defineProps<{
   nEtapes: number;
