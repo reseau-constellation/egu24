@@ -32,7 +32,7 @@ export type élémentDonnéesPluvio = {
   [ID_COL_PRECIP]: number;
 };
 
-export const SCHÉMA_DONNÉES: bds.schémaSpécificationBd = {
+export const SCHÉMA_DONNÉES = {
   licence: "ODbl-1_0",
   nuées: [ID_NUÉE_DONNÉES],
   tableaux: [

@@ -89,14 +89,27 @@ export const utiliserDonnées = () => {
       clefTableau: CLEF_TABLEAU,
     },
   );
+  const bdsCorresp = suivre(
+    constl.nuées.suivreBdsCorrespondantes,
+    {
+      idNuée: ID_NUÉE_DONNÉES
+    }
+  )
 
   const utiliserDonnéesStation = ({idStation}: {idStation: string}) => computed(()=>{
     if (!numérisées.value) return undefined;
+    const station = obtStationParId({ id: idStation });
+    const latStation = station?.coords[0]
+    const longStation = station?.coords[1]
+
     const numériséesStation = numérisées.value.filter(
-        d => d.élément.données[ID_COL_ID] === idStation
+        d => d.élément.données[ID_COL_LAT] === latStation && d.élément.données[ID_COL_LONG] === longStation
       )
+    console.log({numériséesStation})
     const dates = [...new Set(numériséesStation.map(d => d.élément.données[ID_COL_HORO]))]
+    console.log({dates})
     const parDates = dates.map(d=>({date: d, vals: numériséesStation.filter(x => x.élément.données[ID_COL_HORO] === d).map(x=>x.élément.données[ID_COL_PRECIP])}))
+    console.log({parDates})
     return parDates.map(
         d => ({ date: d.date, précip: median(d.vals) })
       )
@@ -185,5 +198,6 @@ export const utiliserDonnées = () => {
     imageDeDonnée,
     mesContributions,
     exporterDonnées,
+    bdsCorresp,
   };
 };

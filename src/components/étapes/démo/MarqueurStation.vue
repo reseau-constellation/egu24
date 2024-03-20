@@ -4,14 +4,13 @@
       <v-card variant="flat" width="250">
         <v-card-item class="px-0">
           <v-card-title>{{ idStation }}</v-card-title>
-          {{ numérisées }}
           <v-card-subtitle>
             {{ `${latFormatté}, ${longFormatté}` }}
           </v-card-subtitle>
         </v-card-item>
         <v-card-text class="px-0 text-center">
           <GraphiqueStation :hauteur="150" :vals="donnéesStation"/>
-          <v-btn variant="flat" icon="mdi-camera-outline" size="small" @click="()=>émettre('prendrePhoto')"/>
+          <v-btn class="mt-2" variant="flat" icon="mdi-camera-outline" size="small" @click="()=>émettre('prendrePhoto')"/>
         </v-card-text>
       </v-card>
     </l-popup>
@@ -33,7 +32,7 @@ const émettre = defineEmits<{
 }>();
 
 const { எண்ணை_வடிவூட்டு } = எண்களைப்_பயன்படுத்து();
-const { utiliserDonnéesStation, numérisées } = utiliserDonnées();
+const { utiliserDonnéesStation, numérisées, mesContributions, bdsCorresp } = utiliserDonnées();
 
 const latFormatté = எண்ணை_வடிவூட்டு(
   computed(() => Number.parseFloat(props.coords[0].toFixed(4))),

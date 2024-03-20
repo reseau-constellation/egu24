@@ -2,27 +2,27 @@
   <v-sheet
    width="100%"
    :height="hauteur"
-   class="text-center"
+   class="text-center mb-2"
   >
     <div class="text-center">
-        <div v-show="assezDeDonnées" ref="resizeRef" class="ma-6">
+      <div v-show="assezDeDonnées" ref="resizeRef" class="ma-6">
         <svg ref="svgRef" width="100%">
-            <g class="x-axis" />
-            <g class="y-axis" />
+          <g class="x-axis" />
+          <g class="y-axis" />
         </svg>
-        </div>
-        <v-card
-          v-if="!assezDeDonnées"
-          class="d-flex align-center text-center"
-          variant="flat"
-          :height="hauteur"
-        >
-            <v-card-text>
-                <div class="mx-auto text-h6 text-center text-disabled">
-                    {{ t("démo.graphique.aucuneDonnée") }}
-                </div>
-            </v-card-text>  
-        </v-card>
+      </div>
+      <v-card
+        v-show="!assezDeDonnées"
+        class="d-flex align-center text-center"
+        variant="flat"
+        :height="hauteur"
+      >
+        <v-card-text>
+            <div class="mx-auto text-h6 text-center text-disabled">
+                {{ t("démo.graphique.aucuneDonnée") }}
+            </div>
+        </v-card-text>  
+      </v-card>
     </div>
   </v-sheet>
 </template>
@@ -109,7 +109,7 @@ onMounted(() => {
 
       .attr("fill", "none")
       .attr("stroke", "steelblue")
-      .attr("stroke-width", 2.5)
+      .attr("stroke-width", 1.5)
       .attr(
         "d",
         line<{ date: Date; value: number }>()
