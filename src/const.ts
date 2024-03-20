@@ -1,3 +1,5 @@
+import { bds } from "@constl/ipa";
+
 export const COURRIEL_CONTACT = "julien.malard@mail.mcgill.ca"
 export const URL_CODE_SOURCE = "https://github.com/reseau-constellation";
 export const URL_DONNÉES_EXEMPLE =
@@ -30,10 +32,12 @@ export type élémentDonnéesPluvio = {
   [ID_COL_PRECIP]: number;
 };
 
-export const SCHÉMA_DONNÉES = {
+export const SCHÉMA_DONNÉES: bds.schémaSpécificationBd = {
   licence: "ODbl-1_0",
+  nuées: [ID_NUÉE_DONNÉES],
   tableaux: [
     {
+      clef: CLEF_TABLEAU,
       cols: [
         {
           idVariable: ID_VAR_ID,
@@ -56,7 +60,6 @@ export const SCHÉMA_DONNÉES = {
           idColonne: ID_COL_PRECIP,
         },
       ],
-      clef: CLEF_TABLEAU,
     },
   ],
 };
