@@ -5,25 +5,30 @@
     @retour="() => émettre('retour')"
     @avancer="() => émettre('avancer')"
   >
-    <v-col :class="[mdAndUp ? 'text-h2' : 'text-h3', 'text-center']" :cols="12"> {{ t('données.titre') }} </v-col>
+    <v-col :class="[mdAndUp ? 'text-h2' : 'text-h3', 'text-center']" :cols="12">
+      {{ t("données.titre") }}
+    </v-col>
     <v-col :cols="12">
       <div class="d-flex justify-center flex-wrap mb-6">
         <CarteOption
           :titre="t('données.télécharger')"
           :lien="URL_DONNÉES_EXEMPLE"
-          icône="mdi-download-outline" 
+          icône="mdi-download-outline"
           emphase
         />
         <CarteOption
           :titre="t('données.lienDynamique')"
           :lien="URL_DONNÉES_LIEN"
-          icône="mdi-link" 
+          icône="mdi-link"
         />
       </div>
     </v-col>
     <v-col :cols="12" class="text-center">
-      <span class="text-disabled" @click="()=>ouvrirLien('https://climate.meteo.gc.ca')"> 
-        {{ t('données.crédits') }} {{ lienSourceDonnées }}
+      <span
+        class="text-disabled"
+        @click="() => ouvrirLien('https://climate.meteo.gc.ca')"
+      >
+        {{ t("données.crédits") }} {{ lienSourceDonnées }}
         <v-icon icon="mdi-open-in-new" size="small" />
       </span>
     </v-col>
@@ -52,5 +57,5 @@ const { mdAndUp } = useDisplay();
 const { மொழியாக்கம்_பயன்படுத்து } = கிளிமூக்கை_பயன்படுத்து();
 const { $மொ: t } = மொழியாக்கம்_பயன்படுத்து({});
 
-const lienSourceDonnées = "https://climate.meteo.gc.ca"
+const lienSourceDonnées = "https://climate.meteo.gc.ca";
 </script>
