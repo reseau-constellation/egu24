@@ -44,7 +44,6 @@ import {
   scaleTime,
   select,
   extent,
-  curveBasis,
 } from "d3";
 import { computed } from "vue";
 import {
@@ -114,8 +113,7 @@ onMounted(() => {
         "d",
         line<{ date: Date; value: number }>()
           .x((d: { date: Date; value: number }) => x(d.date))
-          .y((d: { date: Date; value: number }) => y(d.value))
-          .curve(curveBasis),
+          .y((d: { date: Date; value: number }) => y(d.value)),
       );
 
     // render axes with help of scales
