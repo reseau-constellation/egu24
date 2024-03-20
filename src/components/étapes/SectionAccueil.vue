@@ -14,7 +14,7 @@
     >
       <v-img
         :class="{ 'mb-4': true, 'mx-4': !mdAndUp }"
-        src="@/assets/Logo EGU.svg"
+        src="@/assets/logo egu.svg"
         height="150"
         :width="mdAndUp ? 600 : undefined"
       />
