@@ -54,7 +54,7 @@ import {
 
 const props = defineProps<{
   hauteur: number;
-  vals?: { date: string; val: number }[];
+  vals?: { date: number; précip: number }[];
 }>();
 
 const { எண்ணை_வடிவூட்டு } = எண்களைப்_பயன்படுத்து();
@@ -63,8 +63,8 @@ const { $மொ: t } = மொழியாக்கம்_பயன்படு�
 
 const données = computed(() =>
   (props.vals || []).map((x) => ({
-    date: new Date(parseInt(x.date)),
-    value: x.val,
+    date: new Date(x.date),
+    value: x.précip,
   })),
 );
 const svgRef = ref(null);

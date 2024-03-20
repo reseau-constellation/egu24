@@ -5,14 +5,16 @@ export const URL_DONNÉES_EXEMPLE =
 export const URL_DONNÉES_LIEN =
   "https://docs.google.com/spreadsheets/d/15_Kmiu2MRqCf23ZspeD-Ex9x3cUYlisJM9cc9ynayow/";
 
-export const ID_NUÉE_DONNÉES = process.env.VITE_ID_NUÉE_DONNÉES || "";
+// À faire : id nuée
+export const ID_NUÉE_DONNÉES = process.env.VITE_ID_NUÉE_DONNÉES || "/orbitdb/zdpuAmJyEysNGUYXuNBrFaXktzQUiWyfFW2WCgh9yV4Sz2w9j";
 export const CLEF_TABLEAU = "pluviométrie";
 
-export const ID_VAR_ID = "";
-export const ID_VAR_HORO = "";
-export const ID_VAR_LAT = "";
-export const ID_VAR_LONG = "";
-export const ID_VAR_PRECIP = "";
+// À faire : ids variables
+export const ID_VAR_ID = "/orbitdb/zdpuAnsiz6PBJeskg7PEqLoUkWvriJsGYf8mUwdhwQazfyAFF";
+export const ID_VAR_HORO = "/orbitdb/zdpuAnsiz6PBJeskg7PEqLoUkWvriJsGYf8mUwdhwQazfyAG";
+export const ID_VAR_LAT = "/orbitdb/zdpuAnsiz6PBJeskg7PEqLoUkWvriJsGYf8mUwdhwQazfyAFH";
+export const ID_VAR_LONG = "/orbitdb/zdpuAnsiz6PBJeskg7PEqLoUkWvriJsGYf8mUwdhwQazfyAFI";
+export const ID_VAR_PRECIP = "/orbitdb/zdpuAnsiz6PBJeskg7PEqLoUkWvriJsGYf8mUwdhwQazfyAFJ";
 
 export const ID_COL_ID = "idObservation";
 export const ID_COL_HORO = "heureObservation";

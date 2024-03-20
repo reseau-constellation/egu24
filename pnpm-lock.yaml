@@ -32,6 +32,9 @@ dependencies:
   d3:
     specifier: ^7.9.0
     version: 7.9.0
+  just-median:
+    specifier: ^2.2.0
+    version: 2.2.0
   leaflet:
     specifier: ^1.9.4
     version: 1.9.4
@@ -7765,6 +7768,10 @@ packages:
 
   /just-debounce-it@3.2.0:
     resolution: {integrity: sha512-WXzwLL0745uNuedrCsCs3rpmfD6DBaf7uuVwaq98/8dafURfgQaBsSpjiPp5+CW6Vjltwy9cOGI6qE71b3T8iQ==}
+    dev: false
+
+  /just-median@2.2.0:
+    resolution: {integrity: sha512-y7xeJ/2djhCkVoas/Omfz2uq+dS7bxJWf5oHX/nAG1fVOPbvZbWJUwGNgBRoGUlCy8gsyFigeVTNMMu+XCalhw==}
     dev: false
 
   /kind-of@6.0.3:

@@ -46,6 +46,7 @@
                     variant="outlined"
                     label="Input rainfall (mm)"
                     :rules="validPrécip"
+                    :disabled="enSoumission"
                     clearable
                   ></v-text-field>
                   <v-btn

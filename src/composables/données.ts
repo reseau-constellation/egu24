@@ -7,6 +7,7 @@ import {
   onUnmounted,
   ref,
 } from "vue";
+import median from 'just-median';
 
 import { InfoObservation, InfoStation, données, stations } from "@/données/népal";
 import { ClientConstellation, types } from "@constl/ipa";
@@ -89,6 +90,18 @@ export const utiliserDonnées = () => {
     },
   );
 
+  const utiliserDonnéesStation = ({idStation}: {idStation: string}) => computed(()=>{
+    if (!numérisées.value) return undefined;
+    const numériséesStation = numérisées.value.filter(
+        d => d.élément.données[ID_COL_ID] === idStation
+      )
+    const dates = [...new Set(numériséesStation.map(d => d.élément.données[ID_COL_HORO]))]
+    const parDates = dates.map(d=>({date: d, vals: numériséesStation.filter(x => x.élément.données[ID_COL_HORO] === d).map(x=>x.élément.données[ID_COL_PRECIP])}))
+    return parDates.map(
+        d => ({ date: d.date, précip: median(d.vals) })
+      )
+  })
+
   const obtStationParId = ({id}: {id: string}) => {
     return stations.find(s => s.id === id)
   }
@@ -162,10 +175,10 @@ export const utiliserDonnées = () => {
     })
   }
 
-
   return {
     toutesPhotos: données,
     numérisées,
+    utiliserDonnéesStation,
     choisirObservationAléatoire,
     contribuer,
     effacer,
