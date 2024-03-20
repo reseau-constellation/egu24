@@ -83,6 +83,7 @@ const formatterChiffre = (x: number): string => {
 };
 
 // https://dev.to/muratkemaldar/using-vue-3-with-d3-composition-api-3h1g
+// https://stackoverflow.com/questions/28609929/how-to-display-second-y-axis-to-right-of-grouped-bar-chart-data-in-d3
 onMounted(() => {
   const svg = select(svgRef.value);
 

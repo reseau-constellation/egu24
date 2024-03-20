@@ -11,7 +11,7 @@
       </v-card>
       <v-divider class="my-4" />
     </v-col>
-    <v-col :cols="mdAndUp ? 5 : 12">
+    <v-col :cols="mdAndUp ? 6 : 12">
       <v-card class="px-6" variant="flat" height="65vh" style="overflow-y: scroll">
         <div class="text-h5 d-flex">
           {{ t("démo.sousTitre") }}
@@ -36,9 +36,15 @@
               <v-card variant="flat">
                 <v-card-item class="px-0 pt-0">
                   <v-card-title>
-                    {{ stationSélectionnée.nom }}
+                    {{ stationSélectionnée.id }}
                   </v-card-title>
-                  <v-card-subtitle> {{ `${latFormatté}, ${longFormatté}` }} </v-card-subtitle>
+                  <v-card-subtitle> 
+                    <v-icon icon="mdi-map-marker-outline" start />{{ `${latFormatté}, ${longFormatté}` }} 
+                    <br />
+                    <span v-if="observation">
+                      <v-icon icon="mdi-clock-time-three-outline" start /> {{ new Date(observation.horo).toLocaleString() }}
+                    </span>
+                  </v-card-subtitle>
                 </v-card-item>
                 <v-card-text class="px-0">
                   <v-text-field
@@ -79,7 +85,7 @@
         
       </v-card>
     </v-col>
-    <v-col :cols="mdAndUp ? 7 : 12">
+    <v-col :cols="mdAndUp ? 6 : 12">
       <div
         class="mx-auto"
         :style="{
@@ -103,7 +109,6 @@
             v-for="station in stations"
             :key="station.id"
             :coords="station.coords"
-            :nom-station="station.nom"
             :id-station="station.id"
             @prendre-photo="() => prendrePhoto({idStation: station.id})"
           />
