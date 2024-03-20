@@ -1,7 +1,9 @@
-export const stations: { id: string; coords: [number, number] }[] = [
+export type InfoStation = { id: string; coords: [number, number]; nom: string };
+export const stations: InfoStation[] = [
   {
     id: "PT01072_2887",
     coords: [27.6461574, 85.3402103],
+    nom: "Station test",
   },
 ];
 export const données = [
