@@ -34,9 +34,13 @@
       </div>
     </v-col>
     <v-col :cols="12" class="text-center text-h6">
-      {{ t('code.conclusion') }}
+      {{ t("code.conclusion") }}
       <br />
-      <v-icon icon="mdi-email-outline" start @click="() => ouvrirLien(`mailto://${COURRIEL_CONTACT}`)"/>
+      <v-icon
+        icon="mdi-email-outline"
+        start
+        @click="() => ouvrirLien(`mailto://${COURRIEL_CONTACT}`)"
+      />
       {{ COURRIEL_CONTACT }}
     </v-col>
   </etape-cours>
@@ -64,8 +68,8 @@ const { mdAndUp } = useDisplay();
 const { மொழியாக்கம்_பயன்படுத்து } = கிளிமூக்கை_பயன்படுத்து();
 const { $மொ: t } = மொழியாக்கம்_பயன்படுத்து({});
 
-const lienAppli = `https://appli.réseau-constellation.ca/#/données/nuée/${encodeURIComponent(ID_NUÉE_DONNÉES)}`
-const lienPython = "https://github.com/reseau-constellation/egu24-python"
-const lienR = "https://github.com/reseau-constellation/egu24-r"
-const lienJulia = "https://github.com/reseau-constellation/egu24-julia"
+const lienAppli = `https://appli.réseau-constellation.ca/#/données/nuée/${encodeURIComponent(ID_NUÉE_DONNÉES)}`;
+const lienPython = "https://github.com/reseau-constellation/egu24-python";
+const lienR = "https://github.com/reseau-constellation/egu24-r";
+const lienJulia = "https://github.com/reseau-constellation/egu24-julia";
 </script>

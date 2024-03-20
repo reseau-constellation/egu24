@@ -7,9 +7,14 @@ import {
   onUnmounted,
   ref,
 } from "vue";
-import median from 'just-median';
+import median from "just-median";
 
-import { InfoObservation, InfoStation, données, stations } from "@/données/népal";
+import {
+  InfoObservation,
+  InfoStation,
+  données,
+  stations,
+} from "@/données/népal";
 import { ClientConstellation, types } from "@constl/ipa";
 import {
   CLEF_TABLEAU,
@@ -89,52 +94,74 @@ export const utiliserDonnées = () => {
       clefTableau: CLEF_TABLEAU,
     },
   );
-  const bdsCorresp = suivre(
-    constl.nuées.suivreBdsCorrespondantes,
-    {
-      idNuée: ID_NUÉE_DONNÉES
-    }
-  )
+  const bdsCorresp = suivre(constl.nuées.suivreBdsCorrespondantes, {
+    idNuée: ID_NUÉE_DONNÉES,
+  });
 
-  const utiliserDonnéesStation = ({idStation}: {idStation: string}) => computed(()=>{
-    if (!numérisées.value) return undefined;
-    const station = obtStationParId({ id: idStation });
-    const latStation = station?.coords[0]
-    const longStation = station?.coords[1]
+  const utiliserDonnéesStation = ({ idStation }: { idStation: string }) =>
+    computed(() => {
+      if (!numérisées.value) return undefined;
+      const station = obtStationParId({ id: idStation });
+      const latStation = station?.coords[0];
+      const longStation = station?.coords[1];
 
-    const numériséesStation = numérisées.value.filter(
-        d => d.élément.données[ID_COL_LAT] === latStation && d.élément.données[ID_COL_LONG] === longStation
-      )
+      const numériséesStation = numérisées.value.filter(
+        (d) =>
+          d.élément.données[ID_COL_LAT] === latStation &&
+          d.élément.données[ID_COL_LONG] === longStation,
+      );
 
-    const dates = [...new Set(numériséesStation.map(d => d.élément.données[ID_COL_HORO]))]
-    const parDates = dates.map(d=>({date: d, vals: numériséesStation.filter(x => x.élément.données[ID_COL_HORO] === d).map(x=>x.élément.données[ID_COL_PRECIP])}))
+      const dates = [
+        ...new Set(
+          numériséesStation.map((d) => d.élément.données[ID_COL_HORO]),
+        ),
+      ];
+      const parDates = dates.map((d) => ({
+        date: d,
+        vals: numériséesStation
+          .filter((x) => x.élément.données[ID_COL_HORO] === d)
+          .map((x) => x.élément.données[ID_COL_PRECIP]),
+      }));
 
-    const médianeParDate = parDates.map(
-        d => ({ date: d.date, précip: median(d.vals) })
-      ).toSorted((a, b) => a.date > b.date ? 1 : -1);
-    const cumul: {
-      date: number;
-      précip: number;
-    }[] = [];
-    médianeParDate.forEach(x => cumul.push({...x, précip: x.précip + (cumul.length ? cumul[cumul.length - 1].précip : 0) }));
-    console.log({médianeParDate, cumul})
-    return {
-      journalière: médianeParDate,
-      cumul,
-    }
-  })
+      const médianeParDate = parDates
+        .map((d) => ({ date: d.date, précip: median(d.vals) }))
+        .toSorted((a, b) => (a.date > b.date ? 1 : -1));
+      const cumul: {
+        date: number;
+        précip: number;
+      }[] = [];
+      médianeParDate.forEach((x) =>
+        cumul.push({
+          ...x,
+          précip:
+            x.précip + (cumul.length ? cumul[cumul.length - 1].précip : 0),
+        }),
+      );
 
-  const obtStationParId = ({id}: {id: string}) => {
-    return stations.find(s => s.id === id)
-  }
+      return {
+        journalière: médianeParDate,
+        cumul,
+      };
+    });
 
-  const obtObservationParId = ({id}: {id?: string}) => {
-    return données.find(o => o.id === id)
-  }
+  const obtStationParId = ({ id }: { id: string }) => {
+    return stations.find((s) => s.id === id);
+  };
 
-  const contribuer = async ({précip, obs}: {précip: number, obs: InfoObservation}) => {
-    const station = obtStationParId({id: obs.station});
-    if (!station) throw new Error(`Station ${obs.station} introuvable dans les données.`)
+  const obtObservationParId = ({ id }: { id?: string }) => {
+    return données.find((o) => o.id === id);
+  };
+
+  const contribuer = async ({
+    précip,
+    obs,
+  }: {
+    précip: number;
+    obs: InfoObservation;
+  }) => {
+    const station = obtStationParId({ id: obs.station });
+    if (!station)
+      throw new Error(`Station ${obs.station} introuvable dans les données.`);
 
     return await constl.bds.ajouterÉlémentÀTableauUnique({
       schémaBd: SCHÉMA_DONNÉES,
@@ -159,7 +186,10 @@ export const utiliserDonnées = () => {
     },
   );
 
-  const choisirObservationAléatoire = ({ idStation, idPrésente }: { idStation?: string, idPrésente?: string } = {}) => {
+  const choisirObservationAléatoire = ({
+    idStation,
+    idPrésente,
+  }: { idStation?: string; idPrésente?: string } = {}) => {
     // Uniquement inclure celles auxquelles on n'a pas déjà contribué nous-mêmes
     const pasEncoreContribuées = données
       .filter(
@@ -174,7 +204,9 @@ export const utiliserDonnées = () => {
     // À faire : prioriser par n observations et par valeur Z
     // const mu = moyenne(numérisées.value?.map(d => d.élément.données[ID_COL_PRECIP]));
     // const sigma = écartType(numérisées.value);
-    return pasEncoreContribuées[Math.floor(Math.random() * pasEncoreContribuées.length)];
+    return pasEncoreContribuées[
+      Math.floor(Math.random() * pasEncoreContribuées.length)
+    ];
   };
 
   const effacer = async (id: string) => {
@@ -194,8 +226,8 @@ export const utiliserDonnées = () => {
     await constl.nuées.exporterDonnéesNuée({
       idNuée: ID_NUÉE_DONNÉES,
       // langues: []
-    })
-  }
+    });
+  };
 
   return {
     toutesPhotos: données,

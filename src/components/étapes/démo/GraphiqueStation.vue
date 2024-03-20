@@ -1,9 +1,5 @@
 <template>
-  <v-sheet
-   width="100%"
-   :height="hauteur"
-   class="text-center mb-2"
-  >
+  <v-sheet width="100%" :height="hauteur" class="text-center mb-2">
     <div class="text-center">
       <div v-show="assezDeDonnées" ref="resizeRef" class="ma-6">
         <svg ref="svgRef" width="100%">
@@ -18,10 +14,10 @@
         :height="hauteur"
       >
         <v-card-text>
-            <div class="mx-auto text-h6 text-center text-disabled">
-                {{ t("démo.graphique.aucuneDonnée") }}
-            </div>
-        </v-card-text>  
+          <div class="mx-auto text-h6 text-center text-disabled">
+            {{ t("démo.graphique.aucuneDonnée") }}
+          </div>
+        </v-card-text>
       </v-card>
     </div>
   </v-sheet>
@@ -164,8 +160,6 @@ const useResizeObserver = () => {
   return { resizeState, resizeRef };
 };
 const { resizeRef, resizeState } = useResizeObserver();
-
-
 </script>
 <style scoped>
 svg {
