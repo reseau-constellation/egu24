@@ -105,14 +105,23 @@ export const utiliserDonnées = () => {
     const numériséesStation = numérisées.value.filter(
         d => d.élément.données[ID_COL_LAT] === latStation && d.élément.données[ID_COL_LONG] === longStation
       )
-    console.log({numériséesStation})
+
     const dates = [...new Set(numériséesStation.map(d => d.élément.données[ID_COL_HORO]))]
-    console.log({dates})
     const parDates = dates.map(d=>({date: d, vals: numériséesStation.filter(x => x.élément.données[ID_COL_HORO] === d).map(x=>x.élément.données[ID_COL_PRECIP])}))
-    console.log({parDates})
-    return parDates.map(
+
+    const médianeParDate = parDates.map(
         d => ({ date: d.date, précip: median(d.vals) })
-      )
+      ).toSorted((a, b) => a.date > b.date ? 1 : -1);
+    const cumul: {
+      date: number;
+      précip: number;
+    }[] = [];
+    médianeParDate.forEach(x => cumul.push({...x, précip: x.précip + (cumul.length ? cumul[cumul.length - 1].précip : 0) }));
+    console.log({médianeParDate, cumul})
+    return {
+      journalière: médianeParDate,
+      cumul,
+    }
   })
 
   const obtStationParId = ({id}: {id: string}) => {
@@ -182,9 +191,9 @@ export const utiliserDonnées = () => {
   };
 
   const exporterDonnées = async () => {
-    constl.nuées.exporterDonnéesNuée({
+    await constl.nuées.exporterDonnéesNuée({
       idNuée: ID_NUÉE_DONNÉES,
-      langues: []
+      // langues: []
     })
   }
 
