@@ -1,7 +1,7 @@
 <template>
   <v-sheet
    width="100%"
-   :height="hauteur+40"
+   :height="hauteur"
    class="text-center"
   >
     <div class="text-center">
@@ -23,7 +23,6 @@
                 </div>
             </v-card-text>  
         </v-card>
-        <v-btn variant="flat" icon="mdi-camera-outline" size="small" />
     </div>
   </v-sheet>
 </template>
@@ -108,7 +107,7 @@ onMounted(() => {
       .attr("class", "line") // attach class (important for updating)
 
       .attr("fill", "none")
-      .attr("stroke", props.couleur || "steelblue")
+      .attr("stroke", "steelblue")
       .attr("stroke-width", 2.5)
       .attr(
         "d",
@@ -166,6 +165,8 @@ const useResizeObserver = () => {
   return { resizeState, resizeRef };
 };
 const { resizeRef, resizeState } = useResizeObserver();
+
+
 </script>
 <style scoped>
 svg {

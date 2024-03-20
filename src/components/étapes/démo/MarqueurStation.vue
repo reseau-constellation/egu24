@@ -3,13 +3,14 @@
     <l-popup>
       <v-card variant="flat" width="250">
         <v-card-item class="px-0">
-          <v-card-title>{{ titre }}</v-card-title>
+          <v-card-title>{{ nomStation }}</v-card-title>
           <v-card-subtitle>{{
             `${latFormatté}, ${longFormatté}`
           }}</v-card-subtitle>
         </v-card-item>
-        <v-card-text class="px-0">
+        <v-card-text class="px-0 text-center">
           <GraphiqueStation :hauteur="150"/>
+          <v-btn variant="flat" icon="mdi-camera-outline" size="small" @click="()=>émettre('prendrePhoto')"/>
         </v-card-text>
       </v-card>
     </l-popup>
@@ -23,7 +24,11 @@ import GraphiqueStation from "./GraphiqueStation.vue";
 
 const props = defineProps<{
   coords: [number, number];
-  titre: string;
+  nomStation: string;
+  idStation: string;
+}>();
+const émettre = defineEmits<{
+  (e: 'prendrePhoto'): void
 }>();
 
 const { எண்ணை_வடிவூட்டு } = எண்களைப்_பயன்படுத்து();
@@ -34,6 +39,7 @@ const latFormatté = எண்ணை_வடிவூட்டு(
 const longFormatté = எண்ணை_வடிவூட்டு(
   computed(() => Number.parseFloat(props.coords[1].toFixed(4))),
 );
+
 </script>
 <style>
 .leaflet-popup-content {

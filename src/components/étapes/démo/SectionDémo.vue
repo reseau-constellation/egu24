@@ -12,12 +12,12 @@
       <v-divider class="my-4" />
     </v-col>
     <v-col :cols="mdAndUp ? 5 : 12">
-      <v-card class="px-6" variant="flat" height="65vh">
+      <v-card class="px-6" variant="flat" height="65vh" style="overflow-y: scroll">
         <div class="text-h5 d-flex">
           {{ t("démo.sousTitre") }}
           <v-spacer />
-          <v-btn icon="mdi-camera-outline" variant="flat" />
-          <v-btn icon="mdi-download" variant="flat" />
+          
+          <v-btn icon="mdi-download" variant="flat" :loading="enTéléchargement" @click="()=>téléchargerDonnées()"/>
           <v-switch
             v-model="précipSurCarte"
             true-icon="mdi-weather-pouring"
@@ -29,7 +29,7 @@
           <v-row v-if="stationSélectionnée">
             <v-col :cols="9">
               <v-img
-                src="@/données/images/0eaefd63-e4da-43c0-8b15-3c8400f84021.jpg"
+                :src="observation?.image"
               />
             </v-col>
             <v-col :cols="3">
@@ -38,7 +38,7 @@
                   <v-card-title>
                     {{ stationSélectionnée.nom }}
                   </v-card-title>
-                  <v-card-subtitle> 120.45, 89.5 </v-card-subtitle>
+                  <v-card-subtitle> {{ `${latFormatté}, ${longFormatté}` }} </v-card-subtitle>
                 </v-card-item>
                 <v-card-text class="px-0">
                   <v-text-field
@@ -56,22 +56,26 @@
                     :disabled="!précip"
                     :loading="enSoumission"
                     @click="() => soumettreDonnée()"
-                    >Submit</v-btn
                   >
+                    Submit
+                  </v-btn>
+                  <v-btn class="my-2"
+                  width="100%"
+                  append-icon="mdi-camera-flip-outline" 
+                  variant="outlined" @click="()=>prendrePhoto()">
+                    New photo
+                  </v-btn>
                 </v-card-text>
               </v-card>
             </v-col>
           </v-row>
+          <div v-else class="mx-auto my-auto text-h5 text-center text-disabled">
+            {{ t(plusDePhotos ? "démo.plusDePhotos" : "démo.choisirStation") }}
+            <br />
+            <v-btn icon="mdi-camera-outline" variant="flat" @click="()=>prendrePhoto()" />
+          </div>
         </v-card-text>
-        <v-card-actions
-          class="text-disabled"
-          @click="() => ouvrirLien('https://data.smartphones4water.org/')"
-        >
-          {{ t("démo.source") }}
-          <v-icon class="mx-2" size="small" icon="mdi-open-in-new" />
-          {{ t("démo.merci") }}
-          <v-icon class="mx-2" icon="mdi-emoticon-happy-outline" size="small" />
-        </v-card-actions>
+        
       </v-card>
     </v-col>
     <v-col :cols="mdAndUp ? 7 : 12">
@@ -98,16 +102,28 @@
             v-for="station in stations"
             :key="station.id"
             :coords="station.coords"
-            :titre="station.nom"
-            @click="() => sélectionnerStation(station)"
+            :nom-station="station.nom"
+            :id-station="station.id"
+            @prendre-photo="() => prendrePhoto({idStation: station.id})"
           />
         </l-map>
+      </div>
+    </v-col>
+    <v-col :cols="12" class="my-0 py-0">
+      <div
+          class="px-6 text-disabled"
+          @click="() => ouvrirLien('https://data.smartphones4water.org/')"
+        >
+          {{ t("démo.source") }}
+          <v-icon class="mx-2" size="small" icon="mdi-open-in-new" />
+          {{ t("démo.merci") }}
+          <v-icon class="mx-2" icon="mdi-emoticon-happy-outline" size="small" />
       </div>
     </v-col>
   </etape-cours>
 </template>
 <script setup lang="ts">
-import { கிளிமூக்கை_பயன்படுத்து } from "@lassi-js/kilimukku-vue";
+import { எண்களைப்_பயன்படுத்து, கிளிமூக்கை_பயன்படுத்து } from "@lassi-js/kilimukku-vue";
 import { useDisplay } from "vuetify";
 
 import EtapeCours from "@/components/ÉtapeCours.vue";
@@ -115,9 +131,10 @@ import EtapeCours from "@/components/ÉtapeCours.vue";
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
 import MarqueurStation from "./MarqueurStation.vue";
-import { InfoStation, stations } from "@/données/népal";
+import { InfoObservation, stations } from "@/données/népal";
 import { ouvrirLien } from "@/utils/utils";
 import { computed, ref } from "vue";
+import { utiliserDonnées } from "@/composables/données";
 
 defineProps<{
   nEtapes: number;
@@ -132,17 +149,41 @@ const { mdAndUp } = useDisplay();
 
 const { மொழியாக்கம்_பயன்படுத்து } = கிளிமூக்கை_பயன்படுத்து();
 const { $மொ: t } = மொழியாக்கம்_பயன்படுத்து();
+const { எண்ணை_வடிவூட்டு } = எண்களைப்_பயன்படுத்து();
+
+const { choisirObservationAléatoire, exporterDonnées, contribuer } = utiliserDonnées();
+
 
 // Contrôles
 const précipSurCarte = ref(false);
-const stationSélectionnée = ref<InfoStation>();
-const sélectionnerStation = (station: InfoStation) => {
-  if (stationSélectionnée.value?.id !== station.id) {
-    stationSélectionnée.value = station;
-  } else {
-    stationSélectionnée.value = undefined;
-  }
-};
+const stationSélectionnée = computed(()=>{
+  return stations.find(s => s.id === observation.value?.station)
+});
+
+const enTéléchargement = ref(false);
+const téléchargerDonnées = async () => {
+  enTéléchargement.value = true;
+  await exporterDonnées();
+  enTéléchargement.value = false;
+  
+}
+
+// Station
+const latFormatté = எண்ணை_வடிவூட்டு(
+  computed(() => Number.parseFloat(stationSélectionnée.value?.coords[0].toFixed(4) || "0")),
+);
+const longFormatté = எண்ணை_வடிவூட்டு(
+  computed(() => Number.parseFloat(stationSélectionnée.value?.coords[1].toFixed(4) || "0")),
+);
+
+// Sélection photos
+const observation = ref<InfoObservation>();
+const plusDePhotos = ref(false);
+const prendrePhoto = async ({idStation}: {idStation?: string} = {}) => {
+  const nouvellePhoto = choisirObservationAléatoire({idStation, idPrésente: observation.value?.id})
+  observation.value = nouvellePhoto;
+  if (!nouvellePhoto) plusDePhotos.value = true
+}
 
 // Entrée données
 const précip = ref("");
@@ -164,9 +205,14 @@ const validPrécip = [
 
 const enSoumission = ref(false);
 const soumettreDonnée = async () => {
+  if (!observation.value) throw new Error("Observation non sélectionnée")
   enSoumission.value = true;
-  await new Promise((résoudre) => setTimeout(résoudre, 2000));
+  await contribuer({
+    précip: parseFloat(précip.value),
+    obs: observation.value
+  })
   précip.value = "";
+  prendrePhoto();
   enSoumission.value = false;
 };
 </script>

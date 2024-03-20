@@ -22,11 +22,13 @@
     "démo": {
       "titre": "Live demo!",
       "sousTitre": "You are now a citizen scientist",
-      "source": "Data from SmartPhones4Water.",
-      "merci": "Thank you!",
+      "choisirStation": "Choose a station on the map, or else take a picture",
+      "plusDePhotos": "No more photos to analyse",
       "graphique": {
         "aucuneDonnée": "No data yet"
-      }
+      },
+      "source": "Data from SmartPhones4Water.",
+      "merci": "Thank you!"
     },
     "code": {
       "titre": "Dynamic data access",
