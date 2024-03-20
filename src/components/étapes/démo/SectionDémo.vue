@@ -185,7 +185,10 @@ const longFormatté = எண்ணை_வடிவூட்டு(
 // Sélection photos
 const observation = ref<InfoObservation>();
 const plusDePhotos = ref(false);
+let dernièreStationDemandée: string | undefined = undefined;
+
 const prendrePhoto = async ({idStation}: {idStation?: string} = {}) => {
+  dernièreStationDemandée = idStation;
   const nouvellePhoto = choisirObservationAléatoire({idStation, idPrésente: observation.value?.id})
   observation.value = nouvellePhoto;
   if (!nouvellePhoto) plusDePhotos.value = true
@@ -218,7 +221,7 @@ const soumettreDonnée = async () => {
     obs: observation.value
   })
   précip.value = "";
-  prendrePhoto();
+  prendrePhoto({idStation: dernièreStationDemandée});
   enSoumission.value = false;
 };
 </script>
