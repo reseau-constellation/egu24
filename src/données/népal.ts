@@ -1,6 +1,7 @@
 import img0eaefd63 from "./images/0eaefd63-e4da-43c0-8b15-3c8400f84021.jpg";
 import img54e41355 from "./images/54e41355-abe3-4d60-aaae-da2855fbdee9.jpg";
 import img95bc7992 from "./images/95bc7992-6a98-4948-9bbe-50255cc6421b.jpg";
+import imgb3cc1b86 from "./images/b3cc1b86-e461-4799-adf8-5fbc773ef259.jpg";
 
 export type InfoStation = { id: string; coords: [number, number] };
 export const stations: InfoStation[] = [
@@ -39,5 +40,11 @@ export const données: InfoObservation[] = [
     station: "PT01071_2886",
     horo: "2023-10-06T10:21:31.823Z",
     image: img95bc7992,
+  },
+  {
+    id: "b3cc1b86-e461-4799-adf8-5fbc773ef259",
+    station: "PT01072_2887",
+    horo: "2023-05-15T01:38:17.329Z",
+    image: imgb3cc1b86
   }
 ];
