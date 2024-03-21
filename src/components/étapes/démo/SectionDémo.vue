@@ -34,6 +34,18 @@
             false-icon="mdi-cloud-off-outline"
             :color="précipSurCarte ? 'primary' : undefined"
           />
+          <v-menu>
+            <template #activator="{props: propsActivateur}">
+              <v-btn v-bind="propsActivateur" icon="mdi-cog" variant="flat"></v-btn>
+            </template>
+            <v-list>
+              <v-list-item class="text-color-error" title="Clear my data" @click="()=>effacerDonnées()">
+                <template #prepend>
+                  <v-icon icon="mdi-delete" />
+                </template>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </div>
         <v-card-text class="px-0">
           <v-row v-if="stationSélectionnée">
@@ -177,8 +189,9 @@ const { மொழியாக்கம்_பயன்படுத்து } = 
 const { $மொ: t } = மொழியாக்கம்_பயன்படுத்து();
 const { எண்ணை_வடிவூட்டு } = எண்களைப்_பயன்படுத்து();
 
-const { choisirObservationAléatoire, exporterDonnées, contribuer } =
-  utiliserDonnées();
+const { 
+  choisirObservationAléatoire, exporterDonnées, contribuer, effacerDonnées 
+} = utiliserDonnées();
 
 // Contrôles
 const précipSurCarte = ref(false);

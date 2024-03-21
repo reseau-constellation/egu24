@@ -90,6 +90,7 @@ const donnéesCumul = computed(()=>{
 
   listeJours.forEach((j) => {
     const obsPourCeJour = données.value.filter(d=>mêmeJour(d.date, j));
+    console.log({obsPourCeJour})
     if (obsPourCeJour.length) {
       for (const obs of obsPourCeJour) {
         cumul.push({
@@ -105,8 +106,8 @@ const donnéesCumul = computed(()=>{
       })
     }
   }
-    
   );
+  console.log({cumul})
   return cumul;
 })
 
@@ -155,7 +156,7 @@ onMounted(() => {
       );
     
     // https://d3-graph-gallery.com/graph/barplot_animation_start.html
-    svg.selectAll<SVGSVGElement, unknown>("bar")
+    svg.selectAll<SVGSVGElement, unknown>(".bar")
       .data(données.value)
       .join("rect")
         // everything after .join() is applied to every "new" and "existing" element
@@ -167,11 +168,17 @@ onMounted(() => {
         .attr("fill", "steelblue")
 
     // Animation
-    svg.selectAll<SVGSVGElement, unknown>("rect")
+    svg.selectAll<SVGSVGElement, unknown>("bar")
       .transition()
       .duration(800)
-      .attr("y", function(d) { return y(d.précip); })
-      .attr("height", function(d) { return height - y(d.précip); })
+      .attr("y", function(d) { return y((d as {
+        date: Date;
+        précip: number;
+      }).précip); })
+      .attr("height", function(d) { return height - y((d as {
+        date: Date;
+        précip: number;
+      }).précip); })
       .delay((d,i) => i*100)
 
     // render axes with help of scales

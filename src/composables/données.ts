@@ -215,6 +215,18 @@ export const utiliserDonnées = () => {
     });
   };
 
+  const effacerDonnées = async () => {
+    const données = mesContributions.value;
+    if (données)
+      await Promise.all(données.map(d=>constl.bds.effacerÉlémentDeTableauUnique({
+        schémaBd: SCHÉMA_DONNÉES,
+        idNuéeUnique: ID_NUÉE_DONNÉES,
+        clefTableau: CLEF_TABLEAU,
+        idÉlément: d.id
+      }))
+    )
+  }
+
   return {
     toutesPhotos: données,
     numérisées,
@@ -226,5 +238,6 @@ export const utiliserDonnées = () => {
     mesContributions,
     exporterDonnées,
     bdsCorresp,
+    effacerDonnées,
   };
 };

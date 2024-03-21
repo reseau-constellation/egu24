@@ -75,6 +75,18 @@ import img98cab885 from "./images/98cab885-01af-4ed7-b809-43554204ad8e.jpg";
 import imgca767251 from "./images/ca767251-3b63-4c11-ba48-06f3c28e641d.jpg";
 import img4dc830d7 from "./images/4dc830d7-ed49-4297-b585-ee040e69987c.jpg";
 import img8f1a194b from "./images/8f1a194b-4858-4379-99b8-aee921cb9857.jpg";
+import img125dced1 from "./images/125dced1-9367-4f36-9380-cc971a2e6765.jpg";
+import img6a64c7fa from "./images/6a64c7fa-ab8f-4432-8bd5-bb1ffddfd211.jpg";
+import img8b51cf44 from "./images/8b51cf44-9062-4a12-998a-60efd8d4ea63.jpg";
+import imgd9f0d0d0 from "./images/d9f0d0d0-82aa-4bd1-91f5-6db508dab992.jpg";
+import imgacd44583 from "./images/acd44583-6881-4a41-afc0-ebcbebf961f4.jpg";
+import imgd2b938eb from "./images/d2b938eb-d695-4e14-9ee2-dde1cea47e82.jpg";
+import img918d2d6f from "./images/918d2d6f-dc5a-4d1b-9dd5-2de96cc56ac6.jpg";
+import img1f756bda from "./images/1f756bda-953a-4051-be5b-a71bc2396d32.jpg";
+import imgc3ee6e26 from "./images/c3ee6e26-d5a6-428d-94df-6f6434c2ac26.jpg";
+import img9948d540 from "./images/9948d540-759c-43af-8564-9cc3eac65542.jpg";
+import imgc6656497 from "./images/c6656497-915d-47e8-a3c1-527dd62e5c66.jpg";
+
 export type InfoStation = { id: string; coords: [number, number] };
 export const stations: InfoStation[] = [
   {
@@ -85,6 +97,10 @@ export const stations: InfoStation[] = [
     id: "PT01071_2886",
     coords: [27.6349734, 85.5276167],
   },
+  {
+    id: "PT00924_2627",
+    coords: [27.6717534,	85.3249833],
+  }
 ];
 
 export type InfoObservation = {
@@ -556,5 +572,71 @@ export const données: InfoObservation[] = [
     station: "PT01071_2886",
     horo: "2023-08-08T10:37:08.398Z",
     image: img8f1a194b,
+  },
+  {
+    id: "125dced1-9367-4f36-9380-cc971a2e6765",
+    station: "PT00924_2627",
+    horo: "2023-06-28T11:46:27.024Z",
+    image: img125dced1,
+  },
+  {
+    id: "6a64c7fa-ab8f-4432-8bd5-bb1ffddfd211",
+    station: "PT00924_2627",
+    horo: "2023-08-15T02:45:29.529Z",
+    image: img6a64c7fa,
+  },
+  {
+    id: "8b51cf44-9062-4a12-998a-60efd8d4ea63",
+    station: "PT00924_2627",
+    horo: "2023-05-05T03:17:58.429Z",
+    image: img8b51cf44,
+  },
+  {
+    id: "d9f0d0d0-82aa-4bd1-91f5-6db508dab992",
+    station: "PT00924_2627",
+    horo: "2023-05-27T06:12:14.237Z",
+    image: imgd9f0d0d0,
+  },
+  {
+    id: "acd44583-6881-4a41-afc0-ebcbebf961f4",
+    station: "PT00924_2627",
+    horo: "2023-05-18T05:00:30.683Z",
+    image: imgacd44583,
+  },
+  {
+    id: "d2b938eb-d695-4e14-9ee2-dde1cea47e82",
+    station: "PT00924_2627",
+    horo: "2023-06-25T12:18:03.692Z",
+    image: imgd2b938eb,
+  },
+  {
+    id: "918d2d6f-dc5a-4d1b-9dd5-2de96cc56ac6",
+    station: "PT00924_2627",
+    horo: "2023-07-02T05:26:45.11Z",
+    image: img918d2d6f,
+  },
+  {
+    id: "1f756bda-953a-4051-be5b-a71bc2396d32",
+    station: "PT00924_2627",
+    horo: "2023-06-16T11:53:00.382Z",
+    image: img1f756bda,
+  },
+  {
+    id: "c3ee6e26-d5a6-428d-94df-6f6434c2ac26",
+    station: "PT00924_2627",
+    horo: "2023-06-20T06:17:53Z",
+    image: imgc3ee6e26,
+  },
+  {
+    id: "9948d540-759c-43af-8564-9cc3eac65542",
+    station: "PT00924_2627",
+    horo: "2023-06-14T08:08:32.894Z",
+    image: img9948d540,
+  },
+  {
+    id: "c6656497-915d-47e8-a3c1-527dd62e5c66",
+    station: "PT00924_2627",
+    horo: "2023-05-15T13:10:30.802Z",
+    image: imgc6656497,
   },
 ];
