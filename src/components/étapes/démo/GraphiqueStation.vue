@@ -59,7 +59,7 @@ const { $மொ: t } = மொழியாக்கம்_பயன்படு�
 const données = computed(() =>
   (props.vals || []).map((x) => ({
     date: new Date(x.date),
-    value: x.précip,
+    précip: x.précip,
   })),
 );
 const svgRef = ref(null);
@@ -67,6 +67,48 @@ const svgRef = ref(null);
 const assezDeDonnées = computed(() => {
   return !!données.value.length;
 });
+
+const mêmeJour = (d1: Date, d2: Date)=>{
+  return d1.getDate() === d2.getDate() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getFullYear() === d2.getFullYear();
+}
+
+const obtListeJours = function(début: Date, fin: Date) {
+  for (var a=[], d=new Date(début); d<=new Date(fin); d.setDate(d.getDate()+1)) { 
+    a.push(new Date(d));
+  }
+  return a;
+};
+
+const donnéesCumul = computed(()=>{
+  const cumul: {
+        date: Date;
+        précip: number;
+      }[] = [];
+  const listeJours = obtListeJours(new Date(Math.min(...données.value.map(c=>c.date.getTime()))), new Date(Math.max(...données.value.map(c=>c.date.getTime()))));
+
+  listeJours.forEach((j) => {
+    const obsPourCeJour = données.value.filter(d=>mêmeJour(d.date, j));
+    if (obsPourCeJour.length) {
+      for (const obs of obsPourCeJour) {
+        cumul.push({
+          ...obs,
+          précip:
+            obs.précip + (cumul.length ? cumul[cumul.length - 1].précip : 0),
+        });
+      }
+    } else {
+      cumul.push({
+        date: j,
+        précip: cumul.length ? cumul[cumul.length - 1].précip : 0,
+      })
+    }
+  }
+    
+  );
+  return cumul;
+})
 
 const formatteurs: { [chiffre: string]: Ref<string> } = {};
 
@@ -91,26 +133,46 @@ onMounted(() => {
       .range([0, width]); // ... output values
 
     const y = scaleLinear()
-      .domain([0, max(données.value, (d) => d.value)] as [number, number]) // input values...
+      .domain([0, max(donnéesCumul.value, (d) => d.précip)] as [number, number]) // input values...
       .range([height, 0]); // ... output values
 
     svg
       .selectAll<SVGSVGElement, unknown>(".line") // get all "existing" lines in svg
-      .data([données.value]) // sync them with our data
+      .data([donnéesCumul.value]) // sync them with our data
       .join("path")
 
       // everything after .join() is applied to every "new" and "existing" element
       .attr("class", "line") // attach class (important for updating)
 
       .attr("fill", "none")
-      .attr("stroke", "steelblue")
+      .attr("stroke", "#69b3a2")
       .attr("stroke-width", 1.5)
       .attr(
         "d",
-        line<{ date: Date; value: number }>()
-          .x((d: { date: Date; value: number }) => x(d.date))
-          .y((d: { date: Date; value: number }) => y(d.value)),
+        line<{ date: Date; précip: number }>()
+          .x((d: { date: Date; précip: number }) => x(d.date))
+          .y((d: { date: Date; précip: number }) => y(d.précip)),
       );
+    
+    // https://d3-graph-gallery.com/graph/barplot_animation_start.html
+    svg.selectAll<SVGSVGElement, unknown>("bar")
+      .data(données.value)
+      .join("rect")
+        // everything after .join() is applied to every "new" and "existing" element
+        .attr("class", "bar") // attach class (important for updating)
+        .attr("x", function(d) { return x(d.date); })
+        .attr("y", function(d) { return y(d.précip); })
+        .attr("width", 2)
+        .attr("height", function(d) { return height - y(d.précip); })
+        .attr("fill", "steelblue")
+
+    // Animation
+    svg.selectAll<SVGSVGElement, unknown>("rect")
+      .transition()
+      .duration(800)
+      .attr("y", function(d) { return y(d.précip); })
+      .attr("height", function(d) { return height - y(d.précip); })
+      .delay((d,i) => i*100)
 
     // render axes with help of scales
     // (we let Vue render our axis-containers and let D3 populate the elements inside it)

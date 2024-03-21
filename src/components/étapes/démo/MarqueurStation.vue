@@ -9,7 +9,7 @@
           </v-card-subtitle>
         </v-card-item>
         <v-card-text class="px-0 text-center">
-          <GraphiqueStation :hauteur="150" :vals="donnéesStation?.cumul" />
+          <GraphiqueStation :hauteur="150" :vals="donnéesStation" />
           <v-btn
             class="mt-2"
             variant="flat"

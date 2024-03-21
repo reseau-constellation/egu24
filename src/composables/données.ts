@@ -126,22 +126,8 @@ export const utiliserDonnées = () => {
       const médianeParDate = parDates
         .map((d) => ({ date: d.date, précip: median(d.vals) }))
         .toSorted((a, b) => (a.date > b.date ? 1 : -1));
-      const cumul: {
-        date: number;
-        précip: number;
-      }[] = [];
-      médianeParDate.forEach((x) =>
-        cumul.push({
-          ...x,
-          précip:
-            x.précip + (cumul.length ? cumul[cumul.length - 1].précip : 0),
-        }),
-      );
 
-      return {
-        journalière: médianeParDate,
-        cumul,
-      };
+      return médianeParDate;
     });
 
   const obtStationParId = ({ id }: { id: string }) => {
