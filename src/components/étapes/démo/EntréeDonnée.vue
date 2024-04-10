@@ -34,7 +34,7 @@
             :loading="enSoumission"
             @click="() => soumettreDonnée()"
           >
-            Submit
+            {{ t('démo.soumettre') }}
           </v-btn>
           <v-btn
             class="my-2"

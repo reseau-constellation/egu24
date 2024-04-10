@@ -28,6 +28,7 @@
       "indicePrécip": "Input rainfall (mm)",
       "indiceTélécharger": "Download data",
       "nouvellePhoto": "New photo",
+      "soumettre": "Submit",
       "numéroInvalid": "Invalid number",
       "graphique": {
         "aucuneDonnée": "No data yet"
@@ -73,9 +74,10 @@
       "choisirStation": "வரைப்படத்தில் ஒரு இடத்தைத் தேர்ந்தெடு கொள்ளுங்கள், அல்லது ஒரு புகைப்படத்தை எடுத்து கொள்ளுங்கள்",
       "plusDePhotos": "பகுப்பாய்வு செய்ய வேண்டிய புகைப்படம் வேறு ஒன்றும் இல்லை",
       "effacerDonnées": "எனது தரவுகளை நீக்கு",
-      "indicePrécip": "மழை அளவு உள்ளிடு",
+      "indicePrécip": "மழை அளவு (மி. மீ.)",
       "indiceTélécharger": "பதிவிறக்கம்",
-      "nouvellePhoto": "புதிய புகைப்படம்",
+      "nouvellePhoto": "புதிய படம்",
+      "soumettre": "உள்ளிடு",
       "numéroInvalid": "தவரான எண்",
       "graphique": {
         "aucuneDonnée": "இன்னும் தரவுகள் எதும் இல்லை"
