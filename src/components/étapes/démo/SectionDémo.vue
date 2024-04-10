@@ -8,6 +8,19 @@
     <v-col :cols="12">
       <v-card class="px-6" variant="flat">
         <div class="text-h3">{{ t("démo.titre") }}</div>
+        <v-menu v-if="!mdAndUp">
+          <template #activator="{props: propsActivateur}">
+            <v-btn v-bind="propsActivateur" icon="mdi-cog" variant="flat"></v-btn>
+          </template>
+          <v-list>
+            <v-list-item v-if="!mdAndUp" prepend-icon="mdi-download" :title="t('démo.indiceTélécharger')" @click="() => téléchargerDonnées()" />
+            <v-list-item class="text-error" :title="t('démo.effacerDonnées')" @click="()=>effacerDonnées()">
+              <template #prepend>
+                <v-icon icon="mdi-delete" />
+              </template>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-card>
       <v-divider class="my-4" />
     </v-col>
@@ -36,19 +49,19 @@
             false-icon="mdi-cloud-off-outline"
             :color="précipSurCarte ? 'primary' : undefined"
           />
-          <v-menu>
-            <template #activator="{props: propsActivateur}">
-              <v-btn v-bind="propsActivateur" icon="mdi-cog" variant="flat"></v-btn>
-            </template>
-            <v-list>
-              <v-list-item v-if="!mdAndUp" prepend-icon="mdi-download" :title="t('démo.indiceTélécharger')" @click="() => téléchargerDonnées()" />
-              <v-list-item class="text-error" :title="t('démo.effacerDonnées')" @click="()=>effacerDonnées()">
-                <template #prepend>
-                  <v-icon icon="mdi-delete" />
-                </template>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+            <v-menu>
+              <template #activator="{props: propsActivateur}">
+                <v-btn v-bind="propsActivateur" icon="mdi-cog" variant="flat"></v-btn>
+              </template>
+              <v-list>
+                <v-list-item v-if="!mdAndUp" prepend-icon="mdi-download" :title="t('démo.indiceTélécharger')" @click="() => téléchargerDonnées()" />
+                <v-list-item class="text-error" :title="t('démo.effacerDonnées')" @click="()=>effacerDonnées()">
+                  <template #prepend>
+                    <v-icon icon="mdi-delete" />
+                  </template>
+                </v-list-item>
+              </v-list>
+            </v-menu>
         </div>
         <v-card-text class="px-0">
           <v-row v-if="stationSélectionnée">
@@ -206,7 +219,7 @@ const soumettreDonnée = async (précip: number) => {
     précip,
     obs: observation.value,
   });
-  if (mdAndUp) {
+  if (mdAndUp.value) {
     prendrePhoto({ idStation: dernièreStationDemandée });
   } else {
     observation.value = undefined

@@ -24,6 +24,11 @@
       "sousTitre": "You are now a citizen scientist",
       "choisirStation": "Choose a station on the map, or else take a picture",
       "plusDePhotos": "No more photos to analyse",
+      "effacerDonnées": "Clear my data",
+      "indicePrécip": "Input rainfall (mm)",
+      "indiceTélécharger": "Download data",
+      "nouvellePhoto": "New photo",
+      "numéroInvalid": "Invalid number",
       "graphique": {
         "aucuneDonnée": "No data yet"
       },
@@ -46,6 +51,48 @@
     "accueil": {
       "titre": "குறு வகுப்பு ௬.௮: உங்கள் குடிமக்கள் அறிவியலுக்காக விநியோகிக்கப்பட்டத் தரவுத்தளங்கள்",
       "changerLangue": "மொழியை மாறு"
+    },
+    "obtConstellation": {
+      "titre": "விண்மீனைப் பெறு",
+      "options": {
+        "télécharger": "பதிவிறக்கம் செய்யு",
+        "navig": "உலாவி செயலி",
+        "docu": "ஆவணங்களைப் படி",
+        "codeSource": "மூல் குறியீடு"
+      }
+    },
+    "données": {
+      "titre": "உதாரண தரவு பதிவிறக்கம்",
+      "télécharger": "தரவு பதிவிறக்கம்",
+      "lienDynamique": "இணைப்பை நகலெடு",
+      "crédits": "தரவுகளின் உரிமை:"
+    },
+    "démo": {
+      "titre": "விண்மீனின் உதாரணம்",
+      "sousTitre": "இனிமேல் நீங்கள் குடியரசு அறிவியலாளர் தான்!",
+      "choisirStation": "வரைப்படத்தில் ஒரு இடத்தைத் தேர்ந்தெடு கொள்ளுங்கள், அல்லது ஒரு புகைப்படத்தை எடுத்து கொள்ளுங்கள்",
+      "plusDePhotos": "பகுப்பாய்வு செய்ய வேண்டிய புகைப்படம் வேறு ஒன்றும் இல்லை",
+      "effacerDonnées": "எனது தரவுகளை நீக்கு",
+      "indicePrécip": "மழை அளவு உள்ளிடு",
+      "indiceTélécharger": "பதிவிறக்கம்",
+      "nouvellePhoto": "புதிய புகைப்படம்",
+      "numéroInvalid": "தவரான எண்",
+      "graphique": {
+        "aucuneDonnée": "இன்னும் தரவுகள் எதும் இல்லை"
+      },
+      "source": "இந்த தரவுகள் நீருக்காகதிறன்பேசி என்று திட்டத்தால் வழங்கப்பட்டன.",
+      "merci": "நன்றி!"
+    },
+    "code": {
+      "titre": "நேரடி தரவு அணுகல்",
+      "options": {
+        "appli": "செயலியில் அணுகல்",
+        "python": "பைத்தான் குறியீடு",
+        "r": "ஆர் குறியீடு",
+        "julia": "ஜூலீயா குறியீடு"
+      },
+      "conclusion": "நம்ம விண்மீன் ஆராய்ச்சியாளர் குழுவை தொடர்பு கொள்ள தயங்காதீர்கள்",
+      "contact": "julien.malard@mail.mcgill.ca"
     }
   }
 }
