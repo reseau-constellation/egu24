@@ -13,8 +13,8 @@
       :class="{ 'my-auto': true, 'text-center': !mdAndUp }"
     >
       <v-img
-        :class="{ 'mb-4': true, 'mx-4': !mdAndUp }"
-        src="@/assets/logo egu.svg"
+        :class="{ 'mx-4': !mdAndUp }"
+        src="@/assets/logo cours.png"
         height="150"
         :width="mdAndUp ? 600 : undefined"
       />

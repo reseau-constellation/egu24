@@ -90,7 +90,6 @@ const donnéesCumul = computed(()=>{
 
   listeJours.forEach((j) => {
     const obsPourCeJour = données.value.filter(d=>mêmeJour(d.date, j));
-    console.log({obsPourCeJour})
     if (obsPourCeJour.length) {
       for (const obs of obsPourCeJour) {
         cumul.push({
@@ -107,7 +106,6 @@ const donnéesCumul = computed(()=>{
     }
   }
   );
-  console.log({cumul})
   return cumul;
 })
 

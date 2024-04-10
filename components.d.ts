@@ -10,6 +10,7 @@ declare module 'vue' {
     'AjoutDonnée': typeof import('./src/components/étapes/démo/AjoutDonnée.vue')['default']
     BtnMenuLangues: typeof import('./src/components/BtnMenuLangues.vue')['default']
     CarteLien: typeof import('./src/components/étapes/communs/CarteLien.vue')['default']
+    'EntréeDonnée': typeof import('./src/components/étapes/démo/EntréeDonnée.vue')['default']
     'ÉtapeCours': typeof import('./src/components/ÉtapeCours.vue')['default']
     GraphiqueStation: typeof import('./src/components/étapes/démo/GraphiqueStation.vue')['default']
     'ItemLangueProgrès': typeof import('./src/components/ItemLangueProgrès.vue')['default']

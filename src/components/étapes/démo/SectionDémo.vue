@@ -11,7 +11,7 @@
       </v-card>
       <v-divider class="my-4" />
     </v-col>
-    <v-col :cols="mdAndUp ? 6 : 12">
+    <v-col v-if="mdAndUp" :cols="mdAndUp ? 6 : 12">
       <v-card
         class="px-6"
         variant="flat"
@@ -23,12 +23,14 @@
           <v-spacer />
 
           <v-btn
+            v-if="mdAndUp"
             icon="mdi-download"
             variant="flat"
             :loading="enTéléchargement"
             @click="() => téléchargerDonnées()"
           />
           <v-switch
+            v-if="false"
             v-model="précipSurCarte"
             true-icon="mdi-weather-pouring"
             false-icon="mdi-cloud-off-outline"
@@ -39,7 +41,8 @@
               <v-btn v-bind="propsActivateur" icon="mdi-cog" variant="flat"></v-btn>
             </template>
             <v-list>
-              <v-list-item class="text-color-error" title="Clear my data" @click="()=>effacerDonnées()">
+              <v-list-item v-if="!mdAndUp" prepend-icon="mdi-download" :title="t('démo.indiceTélécharger')" @click="() => téléchargerDonnées()" />
+              <v-list-item class="text-error" :title="t('démo.effacerDonnées')" @click="()=>effacerDonnées()">
                 <template #prepend>
                   <v-icon icon="mdi-delete" />
                 </template>
@@ -53,53 +56,13 @@
               <v-img :src="observation?.image" />
             </v-col>
             <v-col :cols="3">
-              <v-card variant="flat">
-                <v-card-item class="px-0 pt-0">
-                  <v-card-title>
-                    {{ stationSélectionnée.id }}
-                  </v-card-title>
-                  <v-card-subtitle>
-                    <v-icon icon="mdi-map-marker-outline" start />{{
-                      `${latFormatté}, ${longFormatté}`
-                    }}
-                    <br />
-                    <span v-if="observation">
-                      <v-icon icon="mdi-clock-time-three-outline" start />
-                      {{ new Date(observation.horo).toLocaleString() }}
-                    </span>
-                  </v-card-subtitle>
-                </v-card-item>
-                <v-card-text class="px-0">
-                  <v-text-field
-                    v-model="précip"
-                    variant="outlined"
-                    label="Input rainfall (mm)"
-                    :rules="validPrécip"
-                    :disabled="enSoumission"
-                    clearable
-                  ></v-text-field>
-                  <v-btn
-                    class="my-2"
-                    width="100%"
-                    append-icon="mdi-check"
-                    variant="outlined"
-                    :disabled="!précip"
-                    :loading="enSoumission"
-                    @click="() => soumettreDonnée()"
-                  >
-                    Submit
-                  </v-btn>
-                  <v-btn
-                    class="my-2"
-                    width="100%"
-                    append-icon="mdi-camera-flip-outline"
-                    variant="outlined"
-                    @click="() => prendrePhoto()"
-                  >
-                    New photo
-                  </v-btn>
-                </v-card-text>
-              </v-card>
+              <EntreeDonnee
+                :station="stationSélectionnée"
+                :observation="observation"
+                :en-soumission="enSoumission"
+                @soumettre="(x) => soumettreDonnée(x.précip)"
+                @prendre-photo="() => prendrePhoto()"
+              />
             </v-col>
           </v-row>
           <div v-else class="mx-auto my-auto text-h5 text-center text-disabled">
@@ -114,6 +77,15 @@
         </v-card-text>
       </v-card>
     </v-col>
+    <v-dialog v-else v-model="dialogueVisible">
+      <EntreeDonnee 
+        :station="stationSélectionnée!"
+        :observation="observation"
+        :en-soumission="enSoumission"
+        @soumettre="(x) => soumettreDonnée(x.précip)"
+        @prendre-photo="() => prendrePhoto()"
+      />
+    </v-dialog>
     <v-col :cols="mdAndUp ? 6 : 12">
       <div
         class="mx-auto"
@@ -159,7 +131,6 @@
 </template>
 <script setup lang="ts">
 import {
-  எண்களைப்_பயன்படுத்து,
   கிளிமூக்கை_பயன்படுத்து,
 } from "@lassi-js/kilimukku-vue";
 import { useDisplay } from "vuetify";
@@ -169,10 +140,12 @@ import EtapeCours from "@/components/ÉtapeCours.vue";
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
 import MarqueurStation from "./MarqueurStation.vue";
+import EntreeDonnee from "./EntréeDonnée.vue";
 import { InfoObservation, stations } from "@/données/népal";
 import { ouvrirLien } from "@/utils/utils";
 import { computed, ref } from "vue";
 import { utiliserDonnées } from "@/composables/données";
+import { watchEffect } from "vue";
 
 defineProps<{
   nEtapes: number;
@@ -187,7 +160,6 @@ const { mdAndUp } = useDisplay();
 
 const { மொழியாக்கம்_பயன்படுத்து } = கிளிமூக்கை_பயன்படுத்து();
 const { $மொ: t } = மொழியாக்கம்_பயன்படுத்து();
-const { எண்ணை_வடிவூட்டு } = எண்களைப்_பயன்படுத்து();
 
 const { 
   choisirObservationAléatoire, exporterDonnées, contribuer, effacerDonnées 
@@ -206,20 +178,13 @@ const téléchargerDonnées = async () => {
   enTéléchargement.value = false;
 };
 
-// Station
-const latFormatté = எண்ணை_வடிவூட்டு(
-  computed(() =>
-    Number.parseFloat(stationSélectionnée.value?.coords[0].toFixed(4) || "0"),
-  ),
-);
-const longFormatté = எண்ணை_வடிவூட்டு(
-  computed(() =>
-    Number.parseFloat(stationSélectionnée.value?.coords[1].toFixed(4) || "0"),
-  ),
-);
+const dialogueVisible = ref(false);
 
 // Sélection photos
 const observation = ref<InfoObservation>();
+watchEffect(()=>{
+  dialogueVisible.value = !!observation.value
+})
 const plusDePhotos = ref(false);
 let dernièreStationDemandée: string | undefined = undefined;
 
@@ -233,34 +198,19 @@ const prendrePhoto = async ({ idStation }: { idStation?: string } = {}) => {
   if (!nouvellePhoto) plusDePhotos.value = true;
 };
 
-// Entrée données
-const précip = ref("");
-const précipValid = computed(() => {
-  try {
-    const v = parseFloat(précip.value);
-    if (!isNaN(v)) return true;
-  } catch {
-    return false;
-  }
-});
-const validPrécip = [
-  (val: string) => {
-    if (val === "") return true;
-    if (précipValid.value) return true;
-    return "Invalid number";
-  },
-];
-
 const enSoumission = ref(false);
-const soumettreDonnée = async () => {
+const soumettreDonnée = async (précip: number) => {
   if (!observation.value) throw new Error("Observation non sélectionnée");
   enSoumission.value = true;
   await contribuer({
-    précip: parseFloat(précip.value),
+    précip,
     obs: observation.value,
   });
-  précip.value = "";
-  prendrePhoto({ idStation: dernièreStationDemandée });
+  if (mdAndUp) {
+    prendrePhoto({ idStation: dernièreStationDemandée });
+  } else {
+    observation.value = undefined
+  }
   enSoumission.value = false;
 };
 </script>
