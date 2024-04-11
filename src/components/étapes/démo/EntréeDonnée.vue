@@ -16,7 +16,7 @@
           </v-card-subtitle>
         </v-card-item>
         <v-card-text>
-          <v-img class="pb-6" :src="observation?.image" />
+          <v-img v-if="!mdAndUp" class="pb-6" :src="observation?.image" />
           <v-text-field
             v-model="précip"
             variant="outlined"
@@ -56,6 +56,7 @@ import {
 import type { InfoObservation, InfoStation } from "@/données/népal";
 
 import { computed, ref } from "vue";
+import { useDisplay } from "vuetify";
 
 const props = defineProps<{station: InfoStation, observation?: InfoObservation, enSoumission: boolean}>();
 const émettre = defineEmits<{
@@ -63,7 +64,7 @@ const émettre = defineEmits<{
     (e: 'prendrePhoto'): void;
 }>();
 
-
+const { mdAndUp } = useDisplay();
 const { மொழியாக்கம்_பயன்படுத்து } = கிளிமூக்கை_பயன்படுத்து();
 const { $மொ: t, மொ: t_ } = மொழியாக்கம்_பயன்படுத்து();
 const { எண்ணை_வடிவூட்டு } = எண்களைப்_பயன்படுத்து();
