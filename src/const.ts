@@ -1,5 +1,3 @@
-import { bds } from "@constl/ipa";
-
 export const COURRIEL_CONTACT = "julien.malard@mail.mcgill.ca";
 export const URL_CODE_SOURCE = "https://github.com/reseau-constellation";
 export const URL_DONNÉES_EXEMPLE =
@@ -7,23 +5,22 @@ export const URL_DONNÉES_EXEMPLE =
 export const URL_DONNÉES_LIEN =
   "https://docs.google.com/spreadsheets/d/15_Kmiu2MRqCf23ZspeD-Ex9x3cUYlisJM9cc9ynayow/";
 
-// À faire : id nuée
 export const ID_NUÉE_DONNÉES =
   process.env.VITE_ID_NUÉE_DONNÉES ||
-  "/orbitdb/zdpuAmJyEysNGUYXuNBrFaXktzQUiWyfFW2WCgh9yV4Sz2w9j";
-export const CLEF_TABLEAU = "pluviométrie";
+  "/orbitdb/zdpuAvWUWrZouLuJ5PVdEhNJ85tAPPuJcmw3hiDQMRsMkqgoy";
+export const CLEF_TABLEAU = "11df704f-0b99-41f9-92fb-e8394ab83f88";
 
 // À faire : ids variables
 export const ID_VAR_ID =
-  "/orbitdb/zdpuAnsiz6PBJeskg7PEqLoUkWvriJsGYf8mUwdhwQazfyAFF";
+  "/orbitdb/zdpuAwz2z5zKLHzKrdWY5bytWudXc6B2XCdH8x2uKj7HBxoYq";
 export const ID_VAR_HORO =
-  "/orbitdb/zdpuAnsiz6PBJeskg7PEqLoUkWvriJsGYf8mUwdhwQazfyAG";
+  "/orbitdb/zdpuArcD64xg1vnrGutGyMSESiGQomXFxAxy4kPTUP1L6bDzV";
 export const ID_VAR_LAT =
-  "/orbitdb/zdpuAnsiz6PBJeskg7PEqLoUkWvriJsGYf8mUwdhwQazfyAFH";
+  "/orbitdb/zdpuAycMzQDbpJt6xvMjWGAHyn2Wya6RS6hQcKdK9QNZispex";
 export const ID_VAR_LONG =
-  "/orbitdb/zdpuAnsiz6PBJeskg7PEqLoUkWvriJsGYf8mUwdhwQazfyAFI";
+  "/orbitdb/zdpuAzaZ3u9oPYqF9gukynpSvM2fMxSCD4wLx4qrxcq9R8A8k";
 export const ID_VAR_PRECIP =
-  "/orbitdb/zdpuAnsiz6PBJeskg7PEqLoUkWvriJsGYf8mUwdhwQazfyAFJ";
+  "/orbitdb/zdpuB2fu7mWLyhMxxBatYBPsBCiQcMW6xqsggb9HMKHZcnMtt";
 
 export const ID_COL_ID = "idObservation";
 export const ID_COL_HORO = "heureObservation";
