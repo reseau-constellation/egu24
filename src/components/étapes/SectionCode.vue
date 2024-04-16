@@ -11,6 +11,7 @@
     <v-col :cols="12">
       <div class="d-flex justify-center flex-wrap mb-6">
         <CarteLien
+          v-if="lienAppli"
           :titre="t('code.options.appli')"
           icône="mdi-link"
           :lien="lienAppli"
@@ -56,6 +57,8 @@ import EtapeCours from "@/components/ÉtapeCours.vue";
 import CarteLien from "./communs/CarteLien.vue";
 import { COURRIEL_CONTACT, ID_NUÉE_DONNÉES } from "@/const";
 import { ouvrirLien } from "@/utils/utils";
+import { constellation, suivre } from "@/composables/données";
+import { computed } from "vue";
 
 defineProps<{
   nEtapes: number;
@@ -71,7 +74,11 @@ const { mdAndUp } = useDisplay();
 const { மொழியாக்கம்_பயன்படுத்து } = கிளிமூக்கை_பயன்படுத்து();
 const { $மொ: t } = மொழியாக்கம்_பயன்படுத்து({});
 
-const lienAppli = `https://appli.réseau-constellation.ca/#/données/nuée/${encodeURIComponent(ID_NUÉE_DONNÉES)}`;
+const constl = constellation();
+
+const idsBds = suivre(constl.bds.rechercherBdsParNuée, {idNuée: ID_NUÉE_DONNÉES})
+
+const lienAppli = computed(()=>idsBds.value ? `https://appli.réseau-constellation.ca/#/données/bd/${encodeURIComponent(idsBds.value[0])}` : undefined)
 const lienPython = "https://github.com/reseau-constellation/egu24-python";
 const lienR = "https://github.com/reseau-constellation/egu24-r";
 const lienJulia = "https://github.com/reseau-constellation/egu24-julia";
