@@ -19,6 +19,11 @@
                 <v-icon icon="mdi-delete" />
               </template>
             </v-list-item>
+            <carte-connexions>
+              <template #activator="{props: propsActivateur}">
+                <v-list-item v-bind="propsActivateur" :title="t('Networking')" prepend-icon="mdi-lan"/>
+              </template>
+            </carte-connexions>
           </v-list>
         </v-menu>
       </v-card>
@@ -55,6 +60,11 @@
               </template>
               <v-list>
                 <v-list-item v-if="!mdAndUp" prepend-icon="mdi-download" :title="t('démo.indiceTélécharger')" @click="() => téléchargerDonnées()" />
+                <carte-connexions>
+                  <template #activator="{props: propsActivateur}">
+                    <v-list-item v-bind="propsActivateur" :title="t('Networking')" prepend-icon="mdi-lan"/>
+                  </template>
+                </carte-connexions>
                 <v-list-item class="text-error" :title="t('démo.effacerDonnées')" @click="()=>effacerDonnées()">
                   <template #prepend>
                     <v-icon icon="mdi-delete" />
@@ -154,6 +164,7 @@ import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
 import MarqueurStation from "./MarqueurStation.vue";
 import EntreeDonnee from "./EntréeDonnée.vue";
+import CarteConnexions from "./CarteConnexions.vue";
 import { InfoObservation, stations } from "@/données/népal";
 import { ouvrirLien } from "@/utils/utils";
 import { computed, ref } from "vue";

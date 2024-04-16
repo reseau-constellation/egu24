@@ -17,16 +17,19 @@
           emphase
         />
         <CarteLien
+          v-if="false"
           :titre="t('code.options.python')"
           icône="mdi-language-python"
           :lien="lienPython"
         />
         <CarteLien
+          v-if="false"
           :titre="t('code.options.r')"
           icône="mdi-language-r"
           :lien="lienR"
         />
         <CarteLien
+          v-if="false"
           :titre="t('code.options.julia')"
           icône="mdi-alpha-j-box-outline"
           :lien="lienJulia"

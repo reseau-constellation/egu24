@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     'AjoutDonnée': typeof import('./src/components/étapes/démo/AjoutDonnée.vue')['default']
     BtnMenuLangues: typeof import('./src/components/BtnMenuLangues.vue')['default']
+    CarteConnexions: typeof import('./src/components/étapes/démo/CarteConnexions.vue')['default']
     CarteLien: typeof import('./src/components/étapes/communs/CarteLien.vue')['default']
     'EntréeDonnée': typeof import('./src/components/étapes/démo/EntréeDonnée.vue')['default']
     'ÉtapeCours': typeof import('./src/components/ÉtapeCours.vue')['default']
