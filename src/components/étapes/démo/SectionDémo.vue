@@ -75,10 +75,10 @@
         </div>
         <v-card-text class="px-0">
           <v-row v-if="stationSélectionnée">
-            <v-col :cols="9">
+            <v-col :cols="8">
               <v-img :src="observation?.image" />
             </v-col>
-            <v-col :cols="3">
+            <v-col :cols="4">
               <EntreeDonnee
                 :station="stationSélectionnée"
                 :observation="observation"
