@@ -96,5 +96,54 @@
       "conclusion": "நம்ம விண்மீன் ஆராய்ச்சியாளர் குழுவை தொடர்பு கொள்ள தயங்காதீர்கள்",
       "contact": "julien.malard@mail.mcgill.ca"
     }
+  },
+  "fr": {
+    "accueil": {
+      "titre": "SC6.8: Comment incorporer les données distribuées à vos projets de science citoyenne ",
+      "changerLangue": "Choisir la langue"
+    },
+    "obtConstellation": {
+      "titre": "Obtenir Constellation",
+      "options": {
+        "télécharger": "Télécharger",
+        "navig": "Appli navigateur",
+        "docu": "Lire la documenation",
+        "codeSource": "Code source"
+      }
+    },
+    "données": {
+      "titre": "Obtenir les données test",
+      "télécharger": "Télécharger les données",
+      "lienDynamique": "Copier le lien",
+      "crédits": "Source des données :"
+    },
+    "démo": {
+      "titre": "Exemple en directe !",
+      "sousTitre": "Vous êtes maintenant un citoyen scientifique",
+      "choisirStation": "Choisissez un station sur la carte, ou bien prenez une photo",
+      "plusDePhotos": "Il n'y a plus de données à analyser",
+      "effacerDonnées": "Effacer mes données",
+      "indicePrécip": "Saisir la précipitation (mm)",
+      "indiceTélécharger": "Télécharger les données",
+      "nouvellePhoto": "Nouvelle photo",
+      "soumettre": "Soumettre",
+      "numéroInvalid": "Valeur invalide",
+      "graphique": {
+        "aucuneDonnée": "Aucune donnée pour l'instant"
+      },
+      "source": "Données provenant de SmartPhones4Water.",
+      "merci": "Merci !"
+    },
+    "code": {
+      "titre": "Accès dynamique aux données",
+      "options": {
+        "appli": "Accéder dans l'appli",
+        "python": "Code Python",
+        "r": "Code R",
+        "julia": "Code Julia"
+      },
+      "conclusion": "L'équipe Constellation aimerait bien entendre votre opinion !",
+      "contact": "julien.malard@mail.mcgill.ca"
+    }
   }
 }
