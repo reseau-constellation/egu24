@@ -6,19 +6,19 @@
       @retour="page--"
       @avancer="page++"
     />
-    <SectionObtConstellation
+    <SectionDémo
       :n-etapes="nÉtapes"
       :etape="1"
       @retour="page--"
       @avancer="page++"
     />
-    <SectionTelechargerDonnees
+    <SectionObtConstellation
       :n-etapes="nÉtapes"
       :etape="2"
       @retour="page--"
       @avancer="page++"
     />
-    <SectionDémo
+    <SectionTelechargerDonnees
       :n-etapes="nÉtapes"
       :etape="3"
       @retour="page--"

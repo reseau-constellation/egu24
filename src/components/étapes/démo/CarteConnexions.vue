@@ -20,7 +20,6 @@
 </template>
 <script setup lang="ts">
 import { suivre, constellation } from '@/composables/données';
-import { ID_NUÉE_DONNÉES } from '@/const';
 import { ref } from 'vue';
 
 const dialogue = ref(false);

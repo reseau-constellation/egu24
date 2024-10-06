@@ -6,11 +6,11 @@
     @avancer="() => émettre('avancer')"
   >
     <v-col :cols="mdAndUp ? 4 : 12" class="pa-6 my-auto">
-      <v-img height="300" src="@/assets/logo.svg" />
+      <v-img height="250" src="@/assets/logo.svg" />
     </v-col>
     <v-col
       :cols="mdAndUp ? 8 : 12"
-      :class="{ 'my-auto': true, 'text-center': !mdAndUp }"
+      :class="{ 'my-auto': true, 'text-center': !mdAndUp, 'pt-0': true }"
     >
       <v-img
         :class="{ 'mx-4': !mdAndUp }"

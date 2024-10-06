@@ -15,7 +15,7 @@ import {
   données,
   stations,
 } from "@/données/népal";
-import { ClientConstellation, types } from "@constl/ipa";
+import { Constellation, types } from "@constl/ipa";
 import {
   CLEF_TABLEAU,
   ID_COL_HORO,
@@ -28,8 +28,8 @@ import {
   élémentDonnéesPluvio,
 } from "@/const";
 
-export const constellation = (): ClientConstellation => {
-  const constl = inject<ClientConstellation>("constl");
+export const constellation = (): Constellation => {
+  const constl = inject<Constellation>("constl");
   if (constl) return constl;
   throw new Error("Constellation n'est pas trouvable.");
 };
@@ -92,6 +92,7 @@ export const utiliserDonnées = () => {
     {
       idNuée: ID_NUÉE_DONNÉES,
       clefTableau: CLEF_TABLEAU,
+      vérifierAutorisation: false,  // À faire
     },
   );
   const bdsCorresp = suivre(constl.nuées.suivreBdsCorrespondantes, {
