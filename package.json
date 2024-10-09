@@ -2,14 +2,14 @@
   "name": "site",
   "version": "0.0.0",
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS='--no-warnings' vite",
+    "dev": "cross-env NODE_OPTIONS='--no-warnings' vite --port 5138",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "pnpm build && vite preview",
     "déployer": "node ./scripts/gh-pages-deploy.mjs",
     "formatter": "npx prettier --write \"**/*.{js,mjs,cjs,ts,mts,cts,vue,json}\""
   },
   "dependencies": {
-    "@constl/ipa": "^1.2.4",
+    "@constl/ipa": "^1.2.6",
     "@lassi-js/kilimukku-vue": "^1.1.8",
     "@mdi/font": "7.4.47",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
