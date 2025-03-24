@@ -34,6 +34,7 @@ import {
 import {
   axisBottom,
   axisLeft,
+  curveBumpX,
   line,
   max,
   scaleLinear,
@@ -74,19 +75,12 @@ const mêmeJour = (d1: Date, d2: Date)=>{
     d1.getFullYear() === d2.getFullYear();
 }
 
-const obtListeJours = function(début: Date, fin: Date) {
-  for (var a=[], d=new Date(début); d<=new Date(fin); d.setDate(d.getDate()+1)) { 
-    a.push(new Date(d));
-  }
-  return a;
-};
-
 const donnéesCumul = computed(()=>{
   const cumul: {
         date: Date;
         précip: number;
       }[] = [];
-  const listeJours = obtListeJours(new Date(Math.min(...données.value.map(c=>c.date.getTime()))), new Date(Math.max(...données.value.map(c=>c.date.getTime()))));
+  const listeJours = données.value.map(c=>c.date).sort((a, b) => a.getTime() - b.getTime())
 
   listeJours.forEach((j) => {
     const obsPourCeJour = données.value.filter(d=>mêmeJour(d.date, j));
@@ -124,6 +118,7 @@ onMounted(() => {
   const svg = select(svgRef.value);
 
   watchEffect(() => {
+    console.log({ donnéesCumul: donnéesCumul.value })
     const { width, height } = resizeState.dimensions;
     if (!(width && height)) return;
 
@@ -139,20 +134,23 @@ onMounted(() => {
       .selectAll<SVGSVGElement, unknown>(".line") // get all "existing" lines in svg
       .data([donnéesCumul.value]) // sync them with our data
       .join("path")
-
+    
       // everything after .join() is applied to every "new" and "existing" element
       .attr("class", "line") // attach class (important for updating)
 
       .attr("fill", "none")
       .attr("stroke", "#69b3a2")
-      .attr("stroke-width", 1.5)
+      .attr("stroke-width", 2.5)
       .attr(
         "d",
         line<{ date: Date; précip: number }>()
           .x((d: { date: Date; précip: number }) => x(d.date))
-          .y((d: { date: Date; précip: number }) => y(d.précip)),
+          .y((d: { date: Date; précip: number }) => y(d.précip))
+          .curve(curveBumpX),
       );
     
+    const nJours = x.domain().length > 1 ? Math.round((x.domain()[1].getTime() - x.domain()[0].getTime()) / (1000 * 60 * 60 * 24)) : undefined
+
     // https://d3-graph-gallery.com/graph/barplot_animation_start.html
     svg.selectAll<SVGSVGElement, unknown>(".bar")
       .data(données.value)
@@ -161,12 +159,12 @@ onMounted(() => {
         .attr("class", "bar") // attach class (important for updating)
         .attr("x", function(d) { return x(d.date); })
         .attr("y", function(d) { return y(d.précip); })
-        .attr("width", 2)
+        .attr("width", nJours ? width / nJours : 5)
         .attr("height", function(d) { return height - y(d.précip); })
         .attr("fill", "steelblue")
 
     // Animation
-    svg.selectAll<SVGSVGElement, unknown>("bar")
+    svg.selectAll<SVGSVGElement, unknown>(".bar")
       .transition()
       .duration(800)
       .attr("y", function(d) { return y((d as {
