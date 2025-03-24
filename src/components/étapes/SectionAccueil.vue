@@ -81,6 +81,10 @@ type InfoCours = {
 }
 const cours: InfoCours[] = [
   {
+    nom: "egu25",
+    logo: import("@/assets/logo egu 25.svg")
+  },
+  {
     nom: "nsih24",
     logo: import("@/assets/logo nsih 2024.png")
   },

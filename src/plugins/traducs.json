@@ -2,6 +2,7 @@
   "en": {
     "accueil": {
       "titre": {
+        "egu25": "SC4.5: Using distributed databases in your citizen science research",
         "egu24": "SC6.8: Using distributed databases in your citizen science research",
         "nsih24": "Hands-on Session III : Using Constellation distributed data software in your own citizen science projects"
       },
@@ -54,6 +55,7 @@
   "हिं": {
     "accueil": {
       "titre": {
+        "egu25": "कक्षा ४॰५ - आपके नागरिक विज्ञान के कार्यक्रमों में वितरित आँकड़े",
         "egu24": "कक्षा ६॰८ - आपके नागरिक विज्ञान के कार्यक्रमों में वितरित आँकड़े",
         "nsih24": "प्रशिक्षण ३ - आपके नागरिक विज्ञान के कार्यक्रमों में तारामंडल नाम का वित्तरित आँकड़ों की प्रणाली का प्रयोग"
       },
@@ -106,7 +108,8 @@
   "த": {
     "accueil": {
       "titre": {
-        "egu24": "குறு வகுப்பு ௬.௮: உங்கள் குடிமக்கள் அறிவியலுக்காக விநியோகிக்கப்பட்டத் தரவுத்தளங்கள்"
+        "egu24": "குறு வகுப்பு ௬.௮: உங்கள் குடிமக்கள் அறிவியலுக்காக விநியோகிக்கப்பட்டத் தரவுத்தளங்கள்",
+        "egu25": "குறு வகுப்பு ௪.௫: உங்கள் குடிமக்கள் அறிவியலுக்காக விநியோகிக்கப்பட்டத் தரவுத்தளங்கள்"
       },
       "changerLangue": "மொழியை மாறு"
     },
@@ -157,6 +160,7 @@
   "fr": {
     "accueil": {
       "titre": {
+        "egu25": "SC4.5: Vos projets de science citoyenne à l'ère des données distribuées",
         "egu24": "SC6.8: Comment incorporer les données distribuées à vos projets de science citoyenne",
         "nsih24": "Cours III : Utilisation de Constellation dans vos projets de science citoyenne"
       },
