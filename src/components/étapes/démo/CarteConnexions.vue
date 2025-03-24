@@ -27,13 +27,13 @@
     </v-dialog>
 </template>
 <script setup lang="ts">
-import { suivre, constellation } from '@/composables/données';
+import { suivre, utiliserConstellation } from '@/composables/données';
 import { ref } from 'vue';
 import { obt } from '@constl/vue'
 
 const dialogue = ref(false);
 
-const constl = constellation();
+const constl = utiliserConstellation();
 const connexionsSfip = suivre(constl.réseau.suivreConnexionsPostesSFIP)
 const monIdLibp = obt(constl.obtIdLibp2p);
 

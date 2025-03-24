@@ -57,7 +57,7 @@ import EtapeCours from "@/components/ÉtapeCours.vue";
 import CarteLien from "./communs/CarteLien.vue";
 import { COURRIEL_CONTACT, ID_NUÉE_DONNÉES } from "@/const";
 import { ouvrirLien } from "@/utils/utils";
-import { constellation, suivre } from "@/composables/données";
+import { utiliserConstellation, suivre } from "@/composables/données";
 import { computed } from "vue";
 
 defineProps<{
@@ -74,7 +74,7 @@ const { mdAndUp } = useDisplay();
 const { மொழியாக்கம்_பயன்படுத்து } = கிளிமூக்கை_பயன்படுத்து();
 const { $மொ: t } = மொழியாக்கம்_பயன்படுத்து({});
 
-const constl = constellation();
+const constl = utiliserConstellation();
 
 const idsBds = suivre(constl.bds.rechercherBdsParNuée, {idNuée: ID_NUÉE_DONNÉES})
 

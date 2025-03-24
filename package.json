@@ -6,7 +6,8 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "pnpm build && vite preview",
     "déployer": "node ./scripts/gh-pages-deploy.mjs",
-    "formatter": "npx prettier --write \"**/*.{js,mjs,cjs,ts,mts,cts,vue,json}\""
+    "formatter": "npx prettier --write \"**/*.{js,mjs,cjs,ts,mts,cts,vue,json}\"",
+    "compiler:données": ""
   },
   "dependencies": {
     "@constl/ipa": "^1.6.3",

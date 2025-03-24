@@ -28,7 +28,7 @@ import {
   élémentDonnéesPluvio,
 } from "@/const";
 
-export const constellation = (): Constellation => {
+export const utiliserConstellation = (): Constellation => {
   const constl = inject<Constellation>("constl");
   if (constl) return constl;
   throw new Error("Constellation n'est pas trouvable.");
@@ -85,7 +85,7 @@ const écartType = (x: number[]) => {
 };
 
 export const utiliserDonnées = () => {
-  const constl = constellation();
+  const constl = utiliserConstellation();
 
   const numérisées = suivre(
     constl.nuées.suivreDonnéesTableauNuée<élémentDonnéesPluvio>,
