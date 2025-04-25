@@ -52,7 +52,7 @@
   </etape-cours>
 </template>
 <script setup lang="ts">
-import { கிளிமூக்கை_பயன்படுத்து } from "@lassi-js/kilimukku-vue";
+import { கிளிமூக்கை_பயன்படுத்து, மொழிகளைப்_பயன்படுத்து } from "@lassi-js/kilimukku-vue";
 import { useDisplay } from "vuetify";
 
 import EtapeCours from "@/components/ÉtapeCours.vue";
@@ -72,25 +72,30 @@ const émettre = defineEmits<{
 const { mdAndUp } = useDisplay();
 
 const { மொழியாக்கம்_பயன்படுத்து } = கிளிமூக்கை_பயன்படுத்து();
-const { $மொ: t } = மொழியாக்கம்_பயன்படுத்து({});
+const { மொழிகளை_தேர்ந்தெடுக்கொள்ளு } = மொழிகளைப்_பயன்படுத்து();
+const { $மொ: t } = மொழியாக்கம்_பயன்படுத்து();
 
 // Sélection du cours
 type InfoCours = {
   nom: string;
   logo: Promise<typeof import("*.png") | typeof import("*.svg")>;
+  langueParDéfaut: string;
 }
 const cours: InfoCours[] = [
   {
     nom: "egu25",
-    logo: import("@/assets/logo egu 25.svg")
+    logo: import("@/assets/logo egu 25.svg"),
+    langueParDéfaut: "en",
   },
   {
     nom: "nsih24",
-    logo: import("@/assets/logo nsih 2024.png")
+    logo: import("@/assets/logo nsih 2024.png"),
+    langueParDéfaut: "हिं",
   },
   {
     nom: "egu24",
-    logo: import("@/assets/logo cours egu24.png")
+    logo: import("@/assets/logo cours egu24.png"),
+    langueParDéfaut: "en",
   }
   
 ]
@@ -98,7 +103,11 @@ const cours: InfoCours[] = [
 const choixCours = ref<string>(cours[0].nom);
 const logoCours = ref<string>();
 watchEffect(async () => {
-  logoCours.value = (await cours.find(c=>c.nom === choixCours.value)?.logo)?.default
+  const coursChoisi = cours.find(c=>c.nom === choixCours.value)
+  if (coursChoisi) {
+    logoCours.value = (await coursChoisi.logo)?.default
+    மொழிகளை_தேர்ந்தெடுக்கொள்ளு(coursChoisi.langueParDéfaut)
+  }
 })
 
 
