@@ -59,7 +59,12 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "esbuild"
+      "@ipshipyard/node-datachannel",
+      "@parcel/watcher",
+      "classic-level",
+      "core-js",
+      "esbuild",
+      "iso-constants"
     ]
   }
 }
