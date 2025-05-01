@@ -69,21 +69,25 @@ const assezDeDonnées = computed(() => {
   return !!données.value.length;
 });
 
-const mêmeJour = (d1: Date, d2: Date)=>{
-  return d1.getDate() === d2.getDate() &&
+const mêmeJour = (d1: Date, d2: Date) => {
+  return (
+    d1.getDate() === d2.getDate() &&
     d1.getMonth() === d2.getMonth() &&
-    d1.getFullYear() === d2.getFullYear();
-}
+    d1.getFullYear() === d2.getFullYear()
+  );
+};
 
-const donnéesCumul = computed(()=>{
+const donnéesCumul = computed(() => {
   const cumul: {
-        date: Date;
-        précip: number;
-      }[] = [];
-  const listeJours = données.value.map(c=>c.date).sort((a, b) => a.getTime() - b.getTime())
+    date: Date;
+    précip: number;
+  }[] = [];
+  const listeJours = données.value
+    .map((c) => c.date)
+    .sort((a, b) => a.getTime() - b.getTime());
 
   listeJours.forEach((j) => {
-    const obsPourCeJour = données.value.filter(d=>mêmeJour(d.date, j));
+    const obsPourCeJour = données.value.filter((d) => mêmeJour(d.date, j));
     if (obsPourCeJour.length) {
       for (const obs of obsPourCeJour) {
         cumul.push({
@@ -96,14 +100,13 @@ const donnéesCumul = computed(()=>{
       cumul.push({
         date: j,
         précip: cumul.length ? cumul[cumul.length - 1].précip : 0,
-      })
+      });
     }
-  }
-  );
+  });
   return cumul;
-})
+});
 
-const formatteurs: { [chiffre: string]: Ref<string|undefined> } = {};
+const formatteurs: { [chiffre: string]: Ref<string | undefined> } = {};
 
 const formatterChiffre = (x: number): string => {
   if (!formatteurs[x.toString()]) {
@@ -119,7 +122,6 @@ onMounted(() => {
   const svg = select(svgRef.value);
 
   watchEffect(() => {
-    console.log({ donnéesCumul: donnéesCumul.value })
     const { width, height } = resizeState.dimensions;
     if (!(width && height)) return;
 
@@ -135,7 +137,7 @@ onMounted(() => {
       .selectAll<SVGSVGElement, unknown>(".line") // get all "existing" lines in svg
       .data([donnéesCumul.value]) // sync them with our data
       .join("path")
-    
+
       // everything after .join() is applied to every "new" and "existing" element
       .attr("class", "line") // attach class (important for updating)
 
@@ -149,34 +151,63 @@ onMounted(() => {
           .y((d: { date: Date; précip: number }) => y(d.précip))
           .curve(curveBumpX),
       );
-    
-    const nJours = x.domain().length > 1 ? Math.round((x.domain()[1].getTime() - x.domain()[0].getTime()) / (1000 * 60 * 60 * 24)) : undefined
+
+    const nJours =
+      x.domain().length > 1
+        ? Math.round(
+            (x.domain()[1].getTime() - x.domain()[0].getTime()) /
+              (1000 * 60 * 60 * 24),
+          )
+        : undefined;
 
     // https://d3-graph-gallery.com/graph/barplot_animation_start.html
-    svg.selectAll<SVGSVGElement, unknown>(".bar")
+    svg
+      .selectAll<SVGSVGElement, unknown>(".bar")
       .data(données.value)
       .join("rect")
-        // everything after .join() is applied to every "new" and "existing" element
-        .attr("class", "bar") // attach class (important for updating)
-        .attr("x", function(d) { return x(d.date); })
-        .attr("y", function(d) { return y(d.précip); })
-        .attr("width", nJours ? width / nJours : 5)
-        .attr("height", function(d) { return height - y(d.précip); })
-        .attr("fill", "steelblue")
+      // everything after .join() is applied to every "new" and "existing" element
+      .attr("class", "bar") // attach class (important for updating)
+      .attr("x", function (d) {
+        return x(d.date);
+      })
+      .attr("y", function (d) {
+        return y(d.précip);
+      })
+      .attr("width", nJours ? width / nJours : 5)
+      .attr("height", function (d) {
+        return height - y(d.précip);
+      })
+      .attr("fill", "steelblue");
 
     // Animation
-    svg.selectAll<SVGSVGElement, unknown>(".bar")
+    svg
+      .selectAll<SVGSVGElement, unknown>(".bar")
       .transition()
       .duration(800)
-      .attr("y", function(d) { return y((d as {
-        date: Date;
-        précip: number;
-      }).précip); })
-      .attr("height", function(d) { return height - y((d as {
-        date: Date;
-        précip: number;
-      }).précip); })
-      .delay((d,i) => i*100)
+      .attr("y", function (d) {
+        return y(
+          (
+            d as {
+              date: Date;
+              précip: number;
+            }
+          ).précip,
+        );
+      })
+      .attr("height", function (d) {
+        return (
+          height -
+          y(
+            (
+              d as {
+                date: Date;
+                précip: number;
+              }
+            ).précip,
+          )
+        );
+      })
+      .delay((d, i) => i * 100);
 
     // render axes with help of scales
     // (we let Vue render our axis-containers and let D3 populate the elements inside it)

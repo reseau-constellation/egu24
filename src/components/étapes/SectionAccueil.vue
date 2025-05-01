@@ -27,19 +27,20 @@
           'mx-4': !mdAndUp,
         }"
       >
-        <v-select 
-          v-model="choixCours" :items="cours.map(c=>c.nom)"
+        <v-select
+          v-model="choixCours"
+          :items="cours.map((c) => c.nom)"
           variant="plain"
         >
-          <template #selection="{item}">
+          <template #selection="{ item }">
             <span
-            :class="{
-              'text-h4': mdAndUp,
-              'text-h5': !mdAndUp,
-              'font-weight-light': true,
-            }"
+              :class="{
+                'text-h4': mdAndUp,
+                'text-h5': !mdAndUp,
+                'font-weight-light': true,
+              }"
             >
-            {{ t(`accueil.titre.${item.value}`) }}
+              {{ t(`accueil.titre.${item.value}`) }}
             </span>
           </template>
         </v-select>
@@ -52,7 +53,10 @@
   </etape-cours>
 </template>
 <script setup lang="ts">
-import { கிளிமூக்கை_பயன்படுத்து, மொழிகளைப்_பயன்படுத்து } from "@lassi-js/kilimukku-vue";
+import {
+  கிளிமூக்கை_பயன்படுத்து,
+  மொழிகளைப்_பயன்படுத்து,
+} from "@lassi-js/kilimukku-vue";
 import { useDisplay } from "vuetify";
 
 import EtapeCours from "@/components/ÉtapeCours.vue";
@@ -80,7 +84,7 @@ type InfoCours = {
   nom: string;
   logo: Promise<typeof import("*.png") | typeof import("*.svg")>;
   langueParDéfaut: string;
-}
+};
 const cours: InfoCours[] = [
   {
     nom: "egu25",
@@ -96,19 +100,16 @@ const cours: InfoCours[] = [
     nom: "egu24",
     logo: import("@/assets/logo cours egu24.png"),
     langueParDéfaut: "en",
-  }
-  
-]
+  },
+];
 
 const choixCours = ref<string>(cours[0].nom);
 const logoCours = ref<string>();
 watchEffect(async () => {
-  const coursChoisi = cours.find(c=>c.nom === choixCours.value)
+  const coursChoisi = cours.find((c) => c.nom === choixCours.value);
   if (coursChoisi) {
-    logoCours.value = (await coursChoisi.logo)?.default
-    மொழிகளை_தேர்ந்தெடுக்கொள்ளு(coursChoisi.langueParDéfaut)
+    logoCours.value = (await coursChoisi.logo)?.default;
+    மொழிகளை_தேர்ந்தெடுக்கொள்ளு(coursChoisi.langueParDéfaut);
   }
-})
-
-
+});
 </script>

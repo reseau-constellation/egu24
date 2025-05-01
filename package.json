@@ -11,7 +11,7 @@
     "compiler:données": ""
   },
   "dependencies": {
-    "@constl/ipa": "^1.6.11",
+    "@constl/ipa": "^1.6.13",
     "@constl/vue": "^1.0.4",
     "@lassi-js/kilimukku-vue": "^1.1.11",
     "@mdi/font": "7.4.47",

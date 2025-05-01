@@ -76,9 +76,15 @@ const { $மொ: t } = மொழியாக்கம்_பயன்படு�
 
 const constl = utiliserConstellation();
 
-const idsBds = suivre(constl.bds.rechercherBdsParNuée, {idNuée: ID_NUÉE_DONNÉES})
+const idsBds = suivre(constl.bds.rechercherBdsParNuée, {
+  idNuée: ID_NUÉE_DONNÉES,
+});
 
-const lienAppli = computed(()=>idsBds.value ? `https://appli.réseau-constellation.ca/#/données/bd/${encodeURIComponent(idsBds.value[0])}` : undefined)
+const lienAppli = computed(() =>
+  idsBds.value
+    ? `https://appli.réseau-constellation.ca/#/données/bd/${encodeURIComponent(idsBds.value[0])}`
+    : undefined,
+);
 const lienPython = "https://github.com/reseau-constellation/egu24-python";
 const lienR = "https://github.com/reseau-constellation/egu24-r";
 const lienJulia = "https://github.com/reseau-constellation/egu24-julia";

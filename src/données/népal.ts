@@ -99,8 +99,8 @@ export const stations: InfoStation[] = [
   },
   {
     id: "PT00924_2627",
-    coords: [27.6717534,	85.3249833],
-  }
+    coords: [27.6717534, 85.3249833],
+  },
 ];
 
 export type InfoObservation = {
@@ -111,12 +111,12 @@ export type InfoObservation = {
 };
 
 export const données: InfoObservation[] = [
-    {
-      id: "63f33000-3c5b-4ae1-a471-ff320fdd8379",
-      station: "PT01072_2887",
-      horo: "2023-05-16T03:27:29.293Z",
-      image: img63f33000,
-    },
+  {
+    id: "63f33000-3c5b-4ae1-a471-ff320fdd8379",
+    station: "PT01072_2887",
+    horo: "2023-05-16T03:27:29.293Z",
+    image: img63f33000,
+  },
   {
     id: "b61c5c12-80a0-4792-b2dd-863df41e0036",
     station: "PT01072_2887",
