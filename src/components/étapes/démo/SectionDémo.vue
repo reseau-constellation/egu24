@@ -27,6 +27,7 @@
             @click="() => téléchargerDonnées()"
           />
           <v-switch
+            v-if="false"
             v-model="précipSurCarte"
             true-icon="mdi-weather-pouring"
             false-icon="mdi-cloud-off-outline"
@@ -95,7 +96,7 @@
       <div
         class="mx-auto"
         :style="{
-          height: mdAndUp ? '65vh' : '60vh',
+          height: mdAndUp ? '55vh' : '55vh',
           width: mdAndUp ? '50vw' : '100vw',
         }"
       >
@@ -123,7 +124,7 @@
     </v-col>
     <v-col :cols="12" class="my-0 py-0">
       <div
-        class="px-6 text-disabled"
+        class="px-6 text-disabled text-center"
         @click="() => ouvrirLien('https://data.smartphones4water.org/')"
       >
         {{ t("démo.source") }}

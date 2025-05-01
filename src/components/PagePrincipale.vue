@@ -18,15 +18,15 @@
       @retour="page--"
       @avancer="page++"
     />
-    <SectionTelechargerDonnees
+    <!-- <SectionTelechargerDonnees
       :n-etapes="nÉtapes"
       :etape="3"
       @retour="page--"
       @avancer="page++"
-    />
+    /> -->
     <SectionCode
       :n-etapes="nÉtapes"
-      :etape="4"
+      :etape="3"
       @retour="page--"
       @avancer="page++"
     />
@@ -40,12 +40,12 @@ import SectionAccueil from "./étapes/SectionAccueil.vue";
 
 import { obtLienTéléchargement } from "@/utils/téléchargements";
 import SectionObtConstellation from "./étapes/obtConstellation/SectionObtConstellation.vue";
-import SectionTelechargerDonnees from "./étapes/SectionTéléchargerDonnées.vue";
+// import SectionTelechargerDonnees from "./étapes/SectionTéléchargerDonnées.vue";
 import SectionDémo from "./étapes/démo/SectionDémo.vue";
 import SectionCode from "./étapes/SectionCode.vue";
 
 const page = ref(0);
-const nÉtapes = 5;
+const nÉtapes = 4;
 
 const lienTéléchargementDirecte = ref<string>();
 onMounted(async () => {
